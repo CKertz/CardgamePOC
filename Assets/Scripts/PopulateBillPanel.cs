@@ -32,4 +32,5 @@ public class PopulateBillPanel : MonoBehaviour
         // Set the parent of the child Panel to be the parent Panel
         childPanel.transform.SetParent(billPanel.transform);
     }
+
 }

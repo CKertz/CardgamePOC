@@ -1559,7 +1559,7 @@ GameObject:
   - component: {fileID: 2116632599}
   - component: {fileID: 2116632598}
   - component: {fileID: 2116632597}
-  - component: {fileID: 2116632596}
+  - component: {fileID: 2116632600}
   m_Layer: 5
   m_Name: Shop Item Container
   m_TagString: Untagged
@@ -1587,20 +1587,6 @@ RectTransform:
   m_AnchoredPosition: {x: -12.5, y: -32.5}
   m_SizeDelta: {x: -85, y: -175}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2116632596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2116632594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7edd02f42b26aa14ea7f6ce321b5b124, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shopPanel: {fileID: 2116632594}
-  shopItemPrefab: {fileID: 2742202125375611496, guid: 2f901b98841ccb843bab8442b2361e21, type: 3}
 --- !u!114 &2116632597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1665,3 +1651,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2116632594}
   m_CullTransparentMesh: 1
+--- !u!114 &2116632600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116632594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90013cf3528c1b84bae5f68790480585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopPanel: {fileID: 931919708}
+  shopItemPrefab: {fileID: 2742202125375611496, guid: 2f901b98841ccb843bab8442b2361e21, type: 3}

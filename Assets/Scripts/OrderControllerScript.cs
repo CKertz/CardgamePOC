@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class OrderControllerScript : MonoBehaviour
 {
-    private int bunCount = 0;
-    private int cheeseCount = 0;
-    private int pattyCount = 0;
 
     private Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
 
@@ -14,14 +11,45 @@ public class OrderControllerScript : MonoBehaviour
     {
         //get card name from prefab
         //lookup in quantityCounter if that entry exists. increment or create new entry
-        //TODO: the wiring of this may not work. made a prefab of empty gameobject and attached the script to it so that onclick increment button would work
 
-
+        // extract data from the shop. we get the grandparent because the plus button is in a container,
+        // and the container's parent has the card data
+        string cardName = cardToProcess.GetComponent<SetupShopItemData>().childCardName.text;
+        if(!quantityCounter.ContainsKey(cardName))
+        {
+            quantityCounter.Add(cardName, 1);
+            Debug.Log("new entry. dictionary now contains key of "+cardName+":"+quantityCounter.ContainsKey(cardName));
+        }
+        else
+        {
+            quantityCounter[cardName] = quantityCounter[cardName] + 1;
+            Debug.Log("existing entry, " + cardName + " entry now updated to count of:" + quantityCounter[cardName]);
+        }
     }
 
-    public void deccrementCount(GameObject cardToProcess)
+    public void decrementCount(GameObject cardToProcess)
     {
         //get card name from prefab
+        string cardName = cardToProcess.GetComponent<SetupShopItemData>().childCardName.text;
+        if (quantityCounter.ContainsKey(cardName))
+        {
+            quantityCounter[cardName] = quantityCounter[cardName] - 1;
+            if(quantityCounter[cardName] == 0)
+            {
+                Debug.Log("removing key for" + cardName);
+                quantityCounter.Remove(cardName);
+            }
+        }
+        else
+        {
+            Debug.Log("can not decrement count because entry does not exist");
+        }
+    }
 
+    public void updateOrderQuantity(string cardName, bool isIncrementing)
+    {
+        // find the bill prefab with cardName
+        // use isincrementing to give bill prefab quantity +/- 1
+        // if count is brought from 1 to 0, remove bill item
     }
 }

@@ -59,9 +59,9 @@ public class SetupBillItemData : MonoBehaviour
         childCardQuantity.text = shopItemData.childCardPrice.text;
         if (childCardName != null)
         {
-            Debug.Log("test worked");
             childCardName.text = shopItemData.childCardName.text;
         }
+
         //
 
         PopulateBillPanel billItemParent = FindObjectOfType<PopulateBillPanel>();
@@ -73,14 +73,6 @@ public class SetupBillItemData : MonoBehaviour
 
             billItem.transform.SetParent(billItemParent.gameObject.transform);
         }
-
-        if (childCardName != null)
-        {
-            Debug.Log("test worked");
-            //childCardName.SetText(shopItemData.childCardName.text); 
-        }
-
-
     }
     public void EditBillItemData()
     {
