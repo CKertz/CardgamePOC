@@ -11,49 +11,13 @@ using UnityEngine.UI;
 
 public class SetupBillItemData : MonoBehaviour
 {
-    //public Button ShopItemPlusButton;
-    //public Button ShopItemMinusButton;
 
     [SerializeField] TextMeshProUGUI childCardName; // I think all card props can be serialized later, just testing with name for now
     public TextMeshProUGUI childCardQuantity;
     public Image childCardImage;
-    private string spritePath = "Assets/Sprites/bun"; // Example path, assuming sprite is located in a "Sprites" folder
 
-    ShopItemQuantityButtonController shopItemQuantityButtonController;
     public GameObject billItemPrefab; // Reference to the prefab to instantiate
     public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        shopItemQuantityButtonController = GameObject.FindGameObjectWithTag("ShopPlusButton").GetComponent<ShopItemQuantityButtonController>();
-        //ShopItemQuantityButtonClickHandler clickHandler = GetComponent<ShopItemQuantityButtonClickHandler>();
-        //ShopItemQuantityButtonClickHandler clickHandler = FindObjectOfType<ShopItemQuantityButtonClickHandler>();
-        //if (clickHandler!= null)
-        //{
-        //    clickHandler.OnPlusClick += OnButtonPressAddShopItemToBill;
-        //    Debug.Log("subscribe succeed");
-        //}
-        //else
-        //{
-        //    Debug.Log("subscribe failed");
-        //}
-        //EditBillItemText();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //private void OnButtonPressAddShopItemToBill(object sender, EventArgs e)
-    //{
-    //    Debug.Log("subscriber listen confirmed");
-    //}
-
 
     public void CreateBillItem(GameObject shopItemToConvert)
     {
@@ -82,10 +46,9 @@ public class SetupBillItemData : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Failed to load sprite at path: " + spritePath);
+                    Debug.LogError("Failed to load sprite at path: " + shopItem.CardImagePath);
                 }
             }
-            //AddCardPrefabToShopList(shopItem.CardName, shopItem.CardPrice, shopItem.CardImagePath);
         }
 
         PopulateBillPanel billItemParent = FindObjectOfType<PopulateBillPanel>();
@@ -127,27 +90,5 @@ public class SetupBillItemData : MonoBehaviour
         {
             Debug.Log("can not decrement count because entry does not exist");
         }     
-    }
-    public void EditBillItemData()
-    {
-        if (childCardQuantity != null)
-        {
-            childCardQuantity.text = "x3";
-        }
-
-        if (childCardImage != null)
-        {
-            Sprite sprite = Resources.Load<Sprite>(spritePath);
-            if (sprite != null)
-            {
-                // Sprite loaded successfully
-                // Set the Image component's sprite property
-                childCardImage.sprite = sprite;
-            }
-            else
-            {
-                //Debug.LogError("Failed to load sprite at path: " + "Path/To/Your/Sprite");
-            }
-        }
     }
 }

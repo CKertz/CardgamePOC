@@ -15,7 +15,6 @@ public class PopulateShopPanel : MonoBehaviour
     void Start()
     {
         shopPanel = GameObject.Find("Shop Item Container");
-        //InitializeShopItemJson();
         GetAvailableShopItemsFromJson();
     }
 

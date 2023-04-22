@@ -8,23 +8,7 @@ public class SetupShopItemData : MonoBehaviour
 {
     public TextMeshProUGUI childCardName;
     public TextMeshProUGUI childCardPrice;
-    //public Sprite childCardSprite;
     public Image childCardImage;
-    //private string spritePath = "Assets/Sprites/bun"; // Example path, assuming sprite is located in a "Sprites" folder
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void SetShopItemMetadata(string cardName, float cardPrice, string spritePath)
     {
