@@ -51,6 +51,11 @@ public class PopulateBillPanel : MonoBehaviour
             quantityCounter[cardName] = quantityCounter[cardName] + 1;
             Debug.Log("existing entry, " + cardName + " entry now updated to count of:" + quantityCounter[cardName]);
         }
+
+        GameObject billItemToUpdate = GameObject.Find(cardName);
+        SetupBillItemData billItem = billItemToUpdate.GetComponent<SetupBillItemData>();
+        billItem.childCardQuantity.text = "x" + quantityCounter[cardName];
+
         updateOrderQuantity(cardName, true);
     }
 

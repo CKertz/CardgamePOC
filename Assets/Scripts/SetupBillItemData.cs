@@ -1,6 +1,9 @@
+using Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using TMPro;
 using UnityEngine;
@@ -63,10 +66,31 @@ public class SetupBillItemData : MonoBehaviour
             childCardName.text = shopItemData.childCardName.text;
         }
 
+        //TODO: throw the json path into a res file or similar
+        string filePath = Application.dataPath + "/Models/json/AvailableShopItems.json";
+        string json = File.ReadAllText(filePath);
+        List<ShopItem> shopItemList = JsonConvert.DeserializeObject<List<ShopItem>>(json);
+
+        foreach (ShopItem shopItem in shopItemList)
+        {
+            if(shopItem.CardName == childCardName.text)
+            {
+                Sprite sprite = Resources.Load<Sprite>(shopItem.CardImagePath);
+                if (sprite != null)
+                {
+                    childCardImage.sprite = sprite;
+                }
+                else
+                {
+                    Debug.LogError("Failed to load sprite at path: " + spritePath);
+                }
+            }
+            //AddCardPrefabToShopList(shopItem.CardName, shopItem.CardPrice, shopItem.CardImagePath);
+        }
+
         PopulateBillPanel billItemParent = FindObjectOfType<PopulateBillPanel>();
         if (billItemParent != null)
         {
-            Debug.Log("NAME:"+billItemParent.name);
             if (!quantityCounter.ContainsKey(childCardName.text))
             {
                 GameObject billItem = Instantiate(billItemPrefab);
@@ -86,6 +110,10 @@ public class SetupBillItemData : MonoBehaviour
         if (quantityCounter.ContainsKey(cardName))
         {
             quantityCounter[cardName] = quantityCounter[cardName] - 1;
+            GameObject billItemToUpdate = GameObject.Find(cardName);
+            SetupBillItemData billItem = billItemToUpdate.GetComponent<SetupBillItemData>();
+            billItem.childCardQuantity.text = "x" + quantityCounter[cardName];
+
             if (quantityCounter[cardName] == 0)
             {
                 Debug.Log("removing key for" + cardName);
@@ -93,6 +121,7 @@ public class SetupBillItemData : MonoBehaviour
                 GameObject objectToDelete = GameObject.Find(cardName);
                 Destroy(objectToDelete);
             }
+
         }
         else
         {
