@@ -18,6 +18,7 @@ public class SetupBillItemData : MonoBehaviour
 
     ShopItemQuantityButtonController shopItemQuantityButtonController;
     public GameObject billItemPrefab; // Reference to the prefab to instantiate
+    public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
 
 
 
@@ -62,17 +63,41 @@ public class SetupBillItemData : MonoBehaviour
             childCardName.text = shopItemData.childCardName.text;
         }
 
-        //
-
         PopulateBillPanel billItemParent = FindObjectOfType<PopulateBillPanel>();
         if (billItemParent != null)
-        {        
-            GameObject billItem = Instantiate(billItemPrefab);
-            // Access the parent script's properties or methods
-            Debug.Log("Parent script component found: " + billItemParent.gameObject.name);
-
-            billItem.transform.SetParent(billItemParent.gameObject.transform);
+        {
+            Debug.Log("NAME:"+billItemParent.name);
+            if (!quantityCounter.ContainsKey(childCardName.text))
+            {
+                GameObject billItem = Instantiate(billItemPrefab);
+                billItem.name = childCardName.text;
+                Debug.Log(billItem.name);
+                billItem.transform.SetParent(billItemParent.gameObject.transform);
+            }
+            billItemParent.incrementCount(shopItemToConvert,quantityCounter);
         }
+    }
+
+    public void decrementBillItem(GameObject cardToProcess)
+    {
+        //get card name from prefab
+        string cardName = cardToProcess.GetComponent<SetupShopItemData>().childCardName.text;
+        Debug.Log("dec for"+cardName);
+        if (quantityCounter.ContainsKey(cardName))
+        {
+            quantityCounter[cardName] = quantityCounter[cardName] - 1;
+            if (quantityCounter[cardName] == 0)
+            {
+                Debug.Log("removing key for" + cardName);
+                quantityCounter.Remove(cardName);
+                GameObject objectToDelete = GameObject.Find(cardName);
+                Destroy(objectToDelete);
+            }
+        }
+        else
+        {
+            Debug.Log("can not decrement count because entry does not exist");
+        }     
     }
     public void EditBillItemData()
     {

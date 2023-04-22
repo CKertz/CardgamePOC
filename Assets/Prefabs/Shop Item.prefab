@@ -238,7 +238,6 @@ GameObject:
   - component: {fileID: 1777413852584768532}
   - component: {fileID: 5452899382096698029}
   - component: {fileID: 2600532537586466514}
-  - component: {fileID: 4473463835917458869}
   m_Layer: 5
   m_Name: MinusButton
   m_TagString: Untagged
@@ -349,9 +348,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3681969059877250242, guid: c5587f0a83d90104e8561c59399c4209, type: 3}
-        m_TargetAssemblyTypeName: OrderControllerScript, Assembly-CSharp
-        m_MethodName: decrementCount
+      - m_Target: {fileID: 5354598734286257747, guid: 6130755c1b73bb44b8b158c857c23d79, type: 3}
+        m_TargetAssemblyTypeName: SetupBillItemData, Assembly-CSharp
+        m_MethodName: decrementBillItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2742202125375611496}
@@ -361,21 +360,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4473463835917458869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850564077054530401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a6eb78e28e6bf419b3b626d7af0bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnPlusClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &4244076026409691410
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,18 +830,6 @@ MonoBehaviour:
       - m_Target: {fileID: 5354598734286257747, guid: 6130755c1b73bb44b8b158c857c23d79, type: 3}
         m_TargetAssemblyTypeName: SetupBillItemData, Assembly-CSharp
         m_MethodName: CreateBillItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2742202125375611496}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3681969059877250242, guid: c5587f0a83d90104e8561c59399c4209, type: 3}
-        m_TargetAssemblyTypeName: OrderControllerScript, Assembly-CSharp
-        m_MethodName: incrementCount
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2742202125375611496}
