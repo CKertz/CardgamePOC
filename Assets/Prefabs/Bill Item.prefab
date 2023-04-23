@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 225c6166b0ee14742a999b7113e267c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 164532dbd40cc46488f807be41583d9f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Bun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
   m_sharedMaterial: {fileID: 6785464795631653130, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
@@ -277,9 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'x5
-
-'
+  m_text: $2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
   m_sharedMaterial: {fileID: 6785464795631653130, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
@@ -440,3 +438,4 @@ MonoBehaviour:
   childCardQuantity: {fileID: 1723410627966410012}
   childCardImage: {fileID: 1723410626955642103}
   billItemPrefab: {fileID: 3609436285147583798}
+  billCost: 4

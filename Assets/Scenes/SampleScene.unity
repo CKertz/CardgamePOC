@@ -1036,7 +1036,7 @@ GameObject:
   - component: {fileID: 1678105877}
   m_Layer: 5
   m_Name: Total Cost Text (TMP)
-  m_TagString: Untagged
+  m_TagString: BillCostText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: X
+  m_text: $0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
   m_sharedMaterial: {fileID: 6785464795631653130, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
@@ -1427,7 +1427,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 0
-  m_fontStyle: 0
+  m_fontStyle: 4
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

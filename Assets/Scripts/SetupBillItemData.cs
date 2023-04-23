@@ -1,3 +1,4 @@
+using Assets.Scripts.Handlers;
 using Models;
 using Newtonsoft.Json;
 using System;
@@ -18,6 +19,7 @@ public class SetupBillItemData : MonoBehaviour
 
     public GameObject billItemPrefab; // Reference to the prefab to instantiate
     public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
+    private BillCostHandler billCostHandler = new BillCostHandler();
 
     public void CreateBillItem(GameObject shopItemToConvert)
     {
@@ -58,24 +60,37 @@ public class SetupBillItemData : MonoBehaviour
             {
                 GameObject billItem = Instantiate(billItemPrefab);
                 billItem.name = childCardName.text;
-                Debug.Log(billItem.name);
                 billItem.transform.SetParent(billItemParent.gameObject.transform);
             }
+
             billItemParent.incrementCount(shopItemToConvert,quantityCounter);
+
+            var billCost = billCostHandler.updateBillCostText(shopItemData.childCardPrice.text);
+            GameObject billCostObject = GameObject.FindGameObjectWithTag("BillCostText");
+            TextMeshProUGUI billCostText = billCostObject.GetComponent<TextMeshProUGUI>();
+
+            billCostText.text = "$" + billCost.ToString();
         }
     }
 
     public void decrementBillItem(GameObject cardToProcess)
     {
+        SetupShopItemData shopItemData = cardToProcess.GetComponent<SetupShopItemData>();
         //get card name from prefab
-        string cardName = cardToProcess.GetComponent<SetupShopItemData>().childCardName.text;
-        Debug.Log("dec for"+cardName);
+        string cardName = shopItemData.childCardName.text;
+
         if (quantityCounter.ContainsKey(cardName))
         {
             quantityCounter[cardName] = quantityCounter[cardName] - 1;
             GameObject billItemToUpdate = GameObject.Find(cardName);
             SetupBillItemData billItem = billItemToUpdate.GetComponent<SetupBillItemData>();
             billItem.childCardQuantity.text = "x" + quantityCounter[cardName];
+
+            var billCost = billCostHandler.updateBillCostText("-"+shopItemData.childCardPrice.text);
+            GameObject billCostObject = GameObject.FindGameObjectWithTag("BillCostText");
+            TextMeshProUGUI billCostText = billCostObject.GetComponent<TextMeshProUGUI>();
+
+            billCostText.text = "$" + billCost.ToString();
 
             if (quantityCounter[cardName] == 0)
             {

@@ -7,8 +7,6 @@ public class PopulateBillPanel : MonoBehaviour
 {
     public GameObject billPanel;
     public GameObject childPanelPrefab;
-    public Dictionary<string, int> quantityCounterOLD = new Dictionary<string, int>();
-
 
     public void incrementCount(GameObject cardToProcess, Dictionary<string,int> quantityCounter)
     {
