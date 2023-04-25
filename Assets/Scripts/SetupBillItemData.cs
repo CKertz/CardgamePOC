@@ -18,9 +18,8 @@ public class SetupBillItemData : MonoBehaviour
     public Image childCardImage;
 
     public GameObject billItemPrefab; // Reference to the prefab to instantiate
-    public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
+    //public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
     private BillCostHandler billCostHandler = new BillCostHandler();
-
     public void CreateBillItem(GameObject shopItemToConvert)
     {
         // NOTE: no idea why, but the object needs shaped before instantiating
@@ -56,14 +55,14 @@ public class SetupBillItemData : MonoBehaviour
         PopulateBillPanel billItemParent = FindObjectOfType<PopulateBillPanel>();
         if (billItemParent != null)
         {
-            if (!quantityCounter.ContainsKey(childCardName.text))
+            if (!DataManager.Instance.quantityCounter.ContainsKey(childCardName.text))
             {
                 GameObject billItem = Instantiate(billItemPrefab);
                 billItem.name = childCardName.text;
                 billItem.transform.SetParent(billItemParent.gameObject.transform);
             }
 
-            billItemParent.incrementCount(shopItemToConvert,quantityCounter);
+            billItemParent.incrementCount(shopItemToConvert, DataManager.Instance.quantityCounter);
 
             var billCost = billCostHandler.updateBillCostText(shopItemData.childCardPrice.text);
             GameObject billCostObject = GameObject.FindGameObjectWithTag("BillCostText");
@@ -79,12 +78,12 @@ public class SetupBillItemData : MonoBehaviour
         //get card name from prefab
         string cardName = shopItemData.childCardName.text;
 
-        if (quantityCounter.ContainsKey(cardName))
+        if (DataManager.Instance.quantityCounter.ContainsKey(cardName))
         {
-            quantityCounter[cardName] = quantityCounter[cardName] - 1;
+            DataManager.Instance.quantityCounter[cardName] = DataManager.Instance.quantityCounter[cardName] - 1;
             GameObject billItemToUpdate = GameObject.Find(cardName);
             SetupBillItemData billItem = billItemToUpdate.GetComponent<SetupBillItemData>();
-            billItem.childCardQuantity.text = "x" + quantityCounter[cardName];
+            billItem.childCardQuantity.text = "x" + DataManager.Instance.quantityCounter[cardName];
 
             var billCost = billCostHandler.updateBillCostText("-"+shopItemData.childCardPrice.text);
             GameObject billCostObject = GameObject.FindGameObjectWithTag("BillCostText");
@@ -92,10 +91,10 @@ public class SetupBillItemData : MonoBehaviour
 
             billCostText.text = "$" + billCost.ToString();
 
-            if (quantityCounter[cardName] == 0)
+            if (DataManager.Instance.quantityCounter[cardName] == 0)
             {
                 Debug.Log("removing key for" + cardName);
-                quantityCounter.Remove(cardName);
+                DataManager.Instance.quantityCounter.Remove(cardName);
                 GameObject objectToDelete = GameObject.Find(cardName);
                 Destroy(objectToDelete);
             }

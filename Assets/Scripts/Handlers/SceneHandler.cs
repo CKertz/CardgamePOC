@@ -5,11 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
+    private DeckHandler deckHandler = new DeckHandler();
+
     public void LoadCardScene(string sceneName)
     {
-        SetDataForSceneChange();
+        deckHandler.constructDeck();
+        
         SceneManager.LoadScene(sceneName);
     }
+
 
     private void SetDataForSceneChange()
     {

@@ -17,12 +17,12 @@ public class PopulateBillPanel : MonoBehaviour
         if (!quantityCounter.ContainsKey(cardName))
         {
             quantityCounter.Add(cardName, 1);
-            Debug.Log("new entry. dictionary now contains key of " + cardName + ":" + quantityCounter.ContainsKey(cardName));
+            //Debug.Log("new entry. dictionary now contains key of " + cardName + ":" + quantityCounter.ContainsKey(cardName));
         }
         else
         {
             quantityCounter[cardName] = quantityCounter[cardName] + 1;
-            Debug.Log("existing entry, " + cardName + " entry now updated to count of:" + quantityCounter[cardName]);
+            //Debug.Log("existing entry, " + cardName + " entry now updated to count of:" + quantityCounter[cardName]);
         }
 
         GameObject billItemToUpdate = GameObject.Find(cardName);

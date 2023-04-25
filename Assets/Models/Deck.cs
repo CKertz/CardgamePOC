@@ -9,5 +9,9 @@ namespace Assets.Models
     public class Deck
     {
         public List<Card> CardList { get; set; }
+        public Deck()
+        {
+            CardList = new List<Card>();
+        }
     }
 }
