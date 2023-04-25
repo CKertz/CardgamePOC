@@ -58,12 +58,6 @@ public class DeckHandler
             DataManager.Instance.deck.CardList[k] = DataManager.Instance.deck.CardList[n];
             DataManager.Instance.deck.CardList[n] = value;
         }
-
-        // The list is now randomized
-        foreach (Card obj in DataManager.Instance.deck.CardList)
-        {
-            //Debug.Log(obj.CardName);
-        }
     }
 
 }

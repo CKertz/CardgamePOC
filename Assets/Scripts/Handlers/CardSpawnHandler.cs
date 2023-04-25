@@ -4,10 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class CardSpawnHandler : MonoBehaviour
 {
@@ -20,9 +17,9 @@ public class CardSpawnHandler : MonoBehaviour
     {
         for (int i = 0; i < startingHandCount; i++)
         {
-            Debug.Log(i * spacing);
+            //Debug.Log(i * spacing);
             //TODO: this position formula is terrible but will get the job done for now
-            Vector3 position = transform.position + Vector3.right * (i * spacing) + Vector3.down * 4f; 
+            Vector3 position = transform.position + Vector3.right * (i * spacing) + Vector3.down * 4f + Vector3.left * 4f; 
             spawnNextCard(position);
 
         }
