@@ -101,7 +101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample text
+  m_text: Bun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
   m_sharedMaterial: {fileID: 6785464795631653130, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
@@ -257,7 +257,7 @@ SpriteRenderer:
   m_SortingLayerID: 1375269449
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 164532dbd40cc46488f807be41583d9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

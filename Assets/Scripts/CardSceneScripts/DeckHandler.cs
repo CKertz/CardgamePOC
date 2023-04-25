@@ -62,7 +62,7 @@ public class DeckHandler
         // The list is now randomized
         foreach (Card obj in DataManager.Instance.deck.CardList)
         {
-            Debug.Log(obj.CardName);
+            //Debug.Log(obj.CardName);
         }
     }
 
