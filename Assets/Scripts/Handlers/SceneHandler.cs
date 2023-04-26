@@ -14,9 +14,4 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-
-    private void SetDataForSceneChange()
-    {
-        DataManager.Instance.test = 39;
-    }
 }
