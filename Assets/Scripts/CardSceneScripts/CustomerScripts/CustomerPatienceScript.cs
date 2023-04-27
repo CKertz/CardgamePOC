@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class CustomerPatienceScript : MonoBehaviour
 {
-    public float countdownTime = 10f;
+    private float countdownTime;
+    public float orderTakenPatienceTimer = 30f;
+    public float orderCompletedPatienceTimer = 60f;
 
-    void Start()
+    private void setTimerDuration(TimerType timerType)
     {
-        // Set the initial value of countdownTime to 60 seconds
-        countdownTime = 10f;
+        switch (timerType)
+        {
+            case TimerType.OrderCompletionPatience:
+                countdownTime = orderCompletedPatienceTimer;
+                break;
+            case TimerType.OrderTakenPatience:
+                countdownTime = orderTakenPatienceTimer;
+                break;
+            default:
+                Debug.Log("timer type not specified");
+                break;
+        }
     }
 
-    public void StartTimer()
+    public void StartTimer(TimerType timerType)
     {
+        setTimerDuration(timerType);
+        Debug.Log("countdown timer made for:" + countdownTime + " seconds");
+
         InvokeRepeating("UpdateTimer", 1f, 1f);
     }
 

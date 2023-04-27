@@ -35,13 +35,12 @@ public class CustomerSpawner : MonoBehaviour
         //GameObject customerPatienceTimerObject = Instantiate(customerPatienceTimerPrefab, spawnPoint.position, spawnPoint.rotation);
         CustomerPatienceScript timer = customerPatienceTimerObject.GetComponent<CustomerPatienceScript>();
         customerPatienceTimerObject.transform.SetParent(parentObject.transform);
-        Debug.Log("timer created, starting now");
-        timer.StartTimer();
+        //Debug.Log("timer created, starting now");
+        timer.StartTimer(TimerType.OrderTakenPatience);
     }
 
     private void spawnCustomers()
     {
-        Debug.Log("now spawning " + customerList.Count + " customers");
         foreach (var customer in customerList)
         {
             Sprite randomCustomerSprite = Resources.Load<Sprite>(customer.CustomerSpritePath);
