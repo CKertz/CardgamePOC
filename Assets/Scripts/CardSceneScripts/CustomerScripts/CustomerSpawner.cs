@@ -9,18 +9,51 @@ public class CustomerSpawner : MonoBehaviour
 {
     private List<Customer> customerList;
     public int customerCount;
+    public GameObject customerPrefab;
+    public GameObject customerPatienceTimerPrefab;
+    public Transform spawnPoint;
+
     // Start is called before the first frame update
     void Start()
     {
         //construct list of customers to be had that day
         createCustomerList(customerCount);
+        spawnCustomers();
         //start timer
+        //spawnPatienceTimer();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void spawnPatienceTimer(GameObject parentObject)
+    {
+        GameObject customerPatienceTimerObject = Instantiate(customerPatienceTimerPrefab);
+        //GameObject customerPatienceTimerObject = Instantiate(customerPatienceTimerPrefab, spawnPoint.position, spawnPoint.rotation);
+        CustomerPatienceScript timer = customerPatienceTimerObject.GetComponent<CustomerPatienceScript>();
+        customerPatienceTimerObject.transform.SetParent(parentObject.transform);
+        Debug.Log("timer created, starting now");
+        timer.StartTimer();
+    }
+
+    private void spawnCustomers()
+    {
+        Debug.Log("now spawning " + customerList.Count + " customers");
+        foreach (var customer in customerList)
+        {
+            Sprite randomCustomerSprite = Resources.Load<Sprite>(customer.CustomerSpritePath);
+            GameObject spawnedCustomer = Instantiate(customerPrefab);
+            spawnedCustomer.transform.SetParent(transform);
+            SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
+
+            spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
+            Debug.Log("now spawning pateience timer");
+            spawnPatienceTimer(spawnedCustomer);
+
+        }
     }
 
     private List<Customer> createCustomerList(int providedCustomerCount, List<Customer> mandatoryCustomers = null)// "mandatory" meaning force spawning particular people
@@ -44,7 +77,8 @@ public class CustomerSpawner : MonoBehaviour
             Customer customer = new Customer();
             customer.CustomerOrder = createRandomCustomerOrder();
             customer.CustomerName = "testname";
-            customer.CustomerSpritePath = "testpath";
+            customer.CustomerSpritePath = "MenuItemSprites/fries"; //TODO: just a random placeholder for testing
+            customerList.Add(customer);
         }
 
         return customerList;
