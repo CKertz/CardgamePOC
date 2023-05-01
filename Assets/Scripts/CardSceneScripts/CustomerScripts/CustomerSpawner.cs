@@ -12,15 +12,15 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject customerPrefab;
     public GameObject customerPatienceTimerPrefab;
     public Transform spawnPoint;
+    Vector3 position = new Vector3(-20, 0, 0);
 
     // Start is called before the first frame update
     void Start()
     {
         //construct list of customers to be had that day
         createCustomerList(customerCount);
-        spawnCustomers();
-        //start timer
-        //spawnPatienceTimer();
+        SpawnCustomer(customerList[0]);
+        //spawnCustomers();
     }
 
     // Update is called once per frame
@@ -32,30 +32,37 @@ public class CustomerSpawner : MonoBehaviour
     void spawnPatienceTimer(GameObject parentObject)
     {
         GameObject customerPatienceTimerObject = Instantiate(customerPatienceTimerPrefab);
-        //GameObject customerPatienceTimerObject = Instantiate(customerPatienceTimerPrefab, spawnPoint.position, spawnPoint.rotation);
         CustomerPatienceScript timer = customerPatienceTimerObject.GetComponent<CustomerPatienceScript>();
         customerPatienceTimerObject.transform.SetParent(parentObject.transform);
-        //Debug.Log("timer created, starting now");
-        timer.StartTimer(TimerType.OrderTakenPatience);
     }
 
-    private void spawnCustomers()
+    private void SpawnCustomer(Customer customer)
     {
-        foreach (var customer in customerList)
-        {
-            Sprite randomCustomerSprite = Resources.Load<Sprite>(customer.CustomerSpritePath);
-            GameObject spawnedCustomer = Instantiate(customerPrefab);
-            spawnedCustomer.transform.SetParent(transform);
-            SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
-
-            spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
-            Debug.Log("now spawning pateience timer");
-            spawnPatienceTimer(spawnedCustomer);
-
-        }
+        Sprite randomCustomerSprite = Resources.Load<Sprite>(customer.CustomerSpritePath);
+        GameObject spawnedCustomer = Instantiate(customerPrefab, position, Quaternion.identity);
+        spawnedCustomer.transform.SetParent(transform);
+        SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
+        spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
+        spawnPatienceTimer(spawnedCustomer);
     }
 
-    private List<Customer> createCustomerList(int providedCustomerCount, List<Customer> mandatoryCustomers = null)// "mandatory" meaning force spawning particular people
+    //private void spawnCustomers()
+    //{
+    //    foreach (var customer in customerList)
+    //    {
+    //        Sprite randomCustomerSprite = Resources.Load<Sprite>(customer.CustomerSpritePath);
+    //        GameObject spawnedCustomer = Instantiate(customerPrefab, position, Quaternion.identity);
+    //        spawnedCustomer.transform.SetParent(transform);
+    //        SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
+
+    //        spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
+    //        Debug.Log("now spawning pateience timer");
+    //        spawnPatienceTimer(spawnedCustomer);
+
+    //    }
+    //}
+
+    private void createCustomerList(int providedCustomerCount, List<Customer> mandatoryCustomers = null)// "mandatory" meaning force spawning particular people
     {
         customerList = new List<Customer>();
 
@@ -79,8 +86,6 @@ public class CustomerSpawner : MonoBehaviour
             customer.CustomerSpritePath = "MenuItemSprites/fries"; //TODO: just a random placeholder for testing
             customerList.Add(customer);
         }
-
-        return customerList;
     }
 
     private List<MenuItem> createRandomCustomerOrder()
