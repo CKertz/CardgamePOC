@@ -436,10 +436,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0832f8a5dc82ba429f1b7a974b8fb7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerCount: 3
+  customerCount: 5
   customerPrefab: {fileID: 1923353963646779665, guid: 65e8be157c4671b4c8c7dae04e51129d, type: 3}
   customerPatienceTimerPrefab: {fileID: 2338301792063183613, guid: 2aa0df1a0bb72594197ae4f481218e71, type: 3}
   spawnPoint: {fileID: 0}
+  spawnInterval: 15
 --- !u!4 &536155527
 Transform:
   m_ObjectHideFlags: 0

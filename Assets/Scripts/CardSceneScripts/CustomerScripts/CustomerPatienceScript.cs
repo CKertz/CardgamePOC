@@ -41,5 +41,7 @@ public class CustomerPatienceScript : MonoBehaviour
             CancelInvoke("UpdateTimer");
             Debug.Log("Time's up!");
         }
+        DataManager.Instance.testCounter++;
+
     }
 }

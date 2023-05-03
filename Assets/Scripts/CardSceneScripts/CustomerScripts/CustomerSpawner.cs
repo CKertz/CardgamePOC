@@ -12,21 +12,34 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject customerPrefab;
     public GameObject customerPatienceTimerPrefab;
     public Transform spawnPoint;
+    public float spawnInterval = 15f;
     Vector3 position = new Vector3(-20, 0, 0);
+    private int spawnedCustomerCount = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
+
         //construct list of customers to be had that day
         createCustomerList(customerCount);
-        SpawnCustomer(customerList[0]);
+        InvokeRepeating("SpawnCustomer", 5f, spawnInterval);
+
+        //SpawnCustomer(customerList[0]);
+        //while(spawnedCustomerCount < customerCount)
+        //{
+        //    spawnedCustomerCount++;
+        //}
         //spawnCustomers();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
+    }
+
+    void SpawnCustomerOnTime()
+    {
+
     }
 
     void spawnPatienceTimer(GameObject parentObject)
@@ -36,14 +49,26 @@ public class CustomerSpawner : MonoBehaviour
         customerPatienceTimerObject.transform.SetParent(parentObject.transform);
     }
 
-    private void SpawnCustomer(Customer customer)
+    private void SpawnCustomer()
     {
-        Sprite randomCustomerSprite = Resources.Load<Sprite>(customer.CustomerSpritePath);
+        if (spawnedCustomerCount >= customerCount)
+        {
+            CancelInvoke("SpawnCustomer");
+        }
+
+        Sprite randomCustomerSprite = Resources.Load<Sprite>(customerList[spawnedCustomerCount].CustomerSpritePath);
+
         GameObject spawnedCustomer = Instantiate(customerPrefab, position, Quaternion.identity);
         spawnedCustomer.transform.SetParent(transform);
+
+        CustomerController spawnedCustomerController = spawnedCustomer.GetComponent<CustomerController>();
+        spawnedCustomerController.customer = customerList[spawnedCustomerCount];
+
         SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
         spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
         spawnPatienceTimer(spawnedCustomer);
+        //add customer's order from customerlist to customer somehow?
+        spawnedCustomerCount++;
     }
 
     //private void spawnCustomers()
