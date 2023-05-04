@@ -4,18 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CustomerSpawner : MonoBehaviour
 {
-    private List<Customer> customerList;
+    public UnityEvent customerSpawnEvent;
+
     public int customerCount;
     public GameObject customerPrefab;
-    public GameObject customerPatienceTimerPrefab;
+    public GameObject timerPrefab;
     public Transform spawnPoint;
     public float spawnInterval = 15f;
     Vector3 position = new Vector3(-20, 0, 0);
     private int spawnedCustomerCount = 0;
 
+    private List<Customer> customerList;
     void Start()
     {
 
@@ -23,12 +26,6 @@ public class CustomerSpawner : MonoBehaviour
         createCustomerList(customerCount);
         InvokeRepeating("SpawnCustomer", 5f, spawnInterval);
 
-        //SpawnCustomer(customerList[0]);
-        //while(spawnedCustomerCount < customerCount)
-        //{
-        //    spawnedCustomerCount++;
-        //}
-        //spawnCustomers();
     }
 
 
@@ -37,14 +34,10 @@ public class CustomerSpawner : MonoBehaviour
         
     }
 
-    void SpawnCustomerOnTime()
-    {
-
-    }
 
     void spawnPatienceTimer(GameObject parentObject)
     {
-        GameObject customerPatienceTimerObject = Instantiate(customerPatienceTimerPrefab);
+        GameObject customerPatienceTimerObject = Instantiate(timerPrefab);
         CustomerPatienceScript timer = customerPatienceTimerObject.GetComponent<CustomerPatienceScript>();
         customerPatienceTimerObject.transform.SetParent(parentObject.transform);
     }
@@ -61,31 +54,18 @@ public class CustomerSpawner : MonoBehaviour
         GameObject spawnedCustomer = Instantiate(customerPrefab, position, Quaternion.identity);
         spawnedCustomer.transform.SetParent(transform);
 
+        customerSpawnEvent.Invoke();
+
         CustomerController spawnedCustomerController = spawnedCustomer.GetComponent<CustomerController>();
         spawnedCustomerController.customer = customerList[spawnedCustomerCount];
 
         SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
         spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
-        spawnPatienceTimer(spawnedCustomer);
+        //spawnPatienceTimer(spawnedCustomer);
         //add customer's order from customerlist to customer somehow?
         spawnedCustomerCount++;
     }
 
-    //private void spawnCustomers()
-    //{
-    //    foreach (var customer in customerList)
-    //    {
-    //        Sprite randomCustomerSprite = Resources.Load<Sprite>(customer.CustomerSpritePath);
-    //        GameObject spawnedCustomer = Instantiate(customerPrefab, position, Quaternion.identity);
-    //        spawnedCustomer.transform.SetParent(transform);
-    //        SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
-
-    //        spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
-    //        Debug.Log("now spawning pateience timer");
-    //        spawnPatienceTimer(spawnedCustomer);
-
-    //    }
-    //}
 
     private void createCustomerList(int providedCustomerCount, List<Customer> mandatoryCustomers = null)// "mandatory" meaning force spawning particular people
     {
