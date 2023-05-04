@@ -15,7 +15,7 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject timerPrefab;
     public Transform spawnPoint;
     public float spawnInterval = 15f;
-    Vector3 position = new Vector3(-20, 0, 0);
+    Vector3 position = new Vector3(-32, 0, 0);
     private int spawnedCustomerCount = 0;
 
     private List<Customer> customerList;
