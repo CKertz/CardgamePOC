@@ -414,7 +414,7 @@ MonoBehaviour:
     m_Top: 6
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: -20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -438,4 +438,3 @@ MonoBehaviour:
   childCardQuantity: {fileID: 1723410627966410012}
   childCardImage: {fileID: 1723410626955642103}
   billItemPrefab: {fileID: 3609436285147583798}
-  billCost: 4
