@@ -13,5 +13,6 @@ namespace Models
         public float CardPrice { get; set; }
         //CardImagePath maybe should be Image item? 
         public string CardImagePath { get; set; }
+        public string ShopImagePath { get; set; }
     }
 }

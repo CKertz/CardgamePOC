@@ -40,14 +40,14 @@ public class SetupBillItemData : MonoBehaviour
         {
             if(shopItem.CardName == childCardName.text)
             {
-                Sprite sprite = Resources.Load<Sprite>(shopItem.CardImagePath);
+                Sprite sprite = Resources.Load<Sprite>(shopItem.ShopImagePath);
                 if (sprite != null)
                 {
                     childCardImage.sprite = sprite;
                 }
                 else
                 {
-                    Debug.LogError("Failed to load sprite at path: " + shopItem.CardImagePath);
+                    Debug.LogError("Failed to load sprite at path: " + shopItem.ShopImagePath);
                 }
             }
         }

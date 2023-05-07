@@ -10,7 +10,7 @@ public class SetupShopItemData : MonoBehaviour
     public TextMeshProUGUI childCardPrice;
     public Image childCardImage;
 
-    public void SetShopItemMetadata(string cardName, float cardPrice, string spritePath)
+    public void SetShopItemMetadata(string cardName, float cardPrice, string spritePath, string shopSpritePath)
     {
         if (childCardName != null)
         {          
@@ -24,14 +24,14 @@ public class SetupShopItemData : MonoBehaviour
 
         if (childCardImage != null)
         {
-            Sprite sprite = Resources.Load<Sprite>(spritePath);
+            Sprite sprite = Resources.Load<Sprite>(shopSpritePath);
             if (sprite != null)
             {
                 childCardImage.sprite = sprite;
             }
             else
             {
-                Debug.LogError("Failed to load sprite at path: " + spritePath);
+                Debug.LogError("Failed to load sprite at path: " + shopSpritePath);
             }
         }
     }

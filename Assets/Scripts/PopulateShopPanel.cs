@@ -33,19 +33,22 @@ public class PopulateShopPanel : MonoBehaviour
         {
             CardName = "Bun",
             CardPrice = 2,
-            CardImagePath = "ShopSprites/bun"
+            ShopImagePath = "ShopSprites/bun",
+            CardImagePath = "ShopSprites/bunproto"
         };
         ShopItem pattyShopItem = new ShopItem
         {
             CardName = "Patty",
             CardPrice = 4,
-            CardImagePath = "ShopSprites/patty"
+            ShopImagePath = "ShopSprites/patty",
+            CardImagePath = "ShopSprites/pattyproto"
         };
         ShopItem cheeseShopItem = new ShopItem
         {
             CardName = "Cheese",
             CardPrice = 3,
-            CardImagePath = "ShopSprites/cheese"
+            ShopImagePath = "ShopSprites/cheese",
+            CardImagePath = "ShopSprites/cheeseproto"
         };
         List<ShopItem> shopItemList = new List<ShopItem> { bunShopItem, pattyShopItem, cheeseShopItem };
         string json = JsonConvert.SerializeObject(shopItemList, Formatting.Indented);
@@ -109,18 +112,18 @@ public class PopulateShopPanel : MonoBehaviour
 
         foreach (ShopItem shopItem in shopItemList)
         {
-            AddCardPrefabToShopList(shopItem.CardName, shopItem.CardPrice, shopItem.CardImagePath);
+            AddCardPrefabToShopList(shopItem.CardName, shopItem.CardPrice, shopItem.CardImagePath, shopItem.ShopImagePath);
         }
     }
 
-    void AddCardPrefabToShopList(string cardName, float cardPrice, string spritePath)
+    void AddCardPrefabToShopList(string cardName, float cardPrice, string spritePath, string shopImagepath)
     {
         // Instantiate the child Panel prefab
         GameObject childPanel = Instantiate(shopItemPrefab);
         SetupShopItemData shopItemDataScript = childPanel.GetComponent<SetupShopItemData>();
         if(shopItemDataScript)
         {
-            shopItemDataScript.SetShopItemMetadata(cardName,cardPrice,spritePath);
+            shopItemDataScript.SetShopItemMetadata(cardName,cardPrice,spritePath, shopImagepath);
         }
         // Set the parent of the child Panel to be the parent Panel
         childPanel.transform.SetParent(shopPanel.transform);

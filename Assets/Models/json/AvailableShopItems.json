@@ -2,16 +2,19 @@
   {
     "CardName": "Bun",
     "CardPrice": 2.0,
-    "CardImagePath": "ShopSprites/bun"
+    "ShopImagePath": "ShopSprites/bun",
+    "CardImagePath": "ShopSprites/bunproto"
   },
   {
     "CardName": "Patty",
     "CardPrice": 4.0,
-    "CardImagePath": "ShopSprites/patty"
+    "ShopImagePath": "ShopSprites/patty",
+    "CardImagePath": "ShopSprites/pattyproto"
   },
   {
     "CardName": "Cheese",
     "CardPrice": 3.0,
-    "CardImagePath": "ShopSprites/cheese"
+    "ShopImagePath": "ShopSprites/cheese",
+    "CardImagePath": "ShopSprites/cheeseproto"
   }
 ]
