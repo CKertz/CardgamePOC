@@ -1,3 +1,4 @@
+using Assets.Models;
 using Models;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ public class CardSpawner : MonoBehaviour
 
     void Start()
     {
+        if(DataManager.Instance == null)
+        {
+            SetupDummyHand();
+        }
         for (int i = 0; i < startingHandCount; i++)
         {
             //Debug.Log(i * spacing);
@@ -127,6 +132,28 @@ public class CardSpawner : MonoBehaviour
                 Debug.Log("Child GameObject not found.");
             }
             Instantiate(cardPrefab);
+
+        }
+    }
+
+    //used to help testing cardscene by filling deck with arbitrary cards
+    private void SetupDummyHand()
+    {
+        var testingDataManager = FindObjectOfType<DataManager>(true);
+        
+        //GameObject testingDataManager = GameObject.FindGameObjectWithTag("TestingDataManager");
+        if (testingDataManager != null)
+        {
+            Debug.Log("TestingDataManager found, setting to active");
+            testingDataManager.gameObject.SetActive(true);
+            DeckHandler deckHandler = new DeckHandler();
+            for (int i = 0; i < startingHandCount; i++)
+            {
+                Card card = new Card();
+                card.CardName = "DummyCard";
+                card.CardSpritePath = deckHandler.lookupCardSpritePathByName("Bun");
+                DataManager.Instance.deck.CardList.Add(card);
+            }
 
         }
     }

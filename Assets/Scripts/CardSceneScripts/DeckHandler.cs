@@ -28,7 +28,7 @@ public class DeckHandler
         shuffleDeck();
     }
 
-    private string lookupCardSpritePathByName(string cardName)
+    public string lookupCardSpritePathByName(string cardName)
     {
         string filePath = Application.dataPath + "/Models/json/AvailableShopItems.json";
         string json = File.ReadAllText(filePath);
