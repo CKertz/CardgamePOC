@@ -10,7 +10,7 @@ public class CardSpawnHandler : MonoBehaviour
 {
     public GameObject cardPrefab;
     public int startingHandCount = 5;
-    private float spacing = 2f;
+    private float spacing = 0.5f;
 
 
     void Start()
@@ -19,7 +19,7 @@ public class CardSpawnHandler : MonoBehaviour
         {
             //Debug.Log(i * spacing);
             //TODO: this position formula is terrible but will get the job done for now
-            Vector3 position = transform.position + Vector3.right * (i * spacing) + Vector3.down * 4f + Vector3.left * 4f; 
+            Vector3 position = transform.position + Vector3.right * (i * spacing) + Vector3.down * 0.8f + Vector3.left * 1.75f; 
             spawnNextCard(position);
 
         }
