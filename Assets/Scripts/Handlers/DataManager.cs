@@ -6,7 +6,6 @@ public class DataManager : MonoBehaviour
 {
     private static DataManager _instance;
     public static DataManager Instance { get { return _instance; } }
-    public int testCounter = 0;
     public Deck deck = new Deck();
     public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
     public List<MenuItem> todayMenuItems = new List<MenuItem>();

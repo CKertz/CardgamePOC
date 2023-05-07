@@ -18,7 +18,6 @@ public class SetupBillItemData : MonoBehaviour
     public Image childCardImage;
 
     public GameObject billItemPrefab; // Reference to the prefab to instantiate
-    //public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
     private BillCostHandler billCostHandler = new BillCostHandler();
     public void CreateBillItem(GameObject shopItemToConvert)
     {

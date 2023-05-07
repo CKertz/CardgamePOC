@@ -930,7 +930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4083192964feb324c990c45e8c834ee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testCounter: 0
 --- !u!4 &907392411
 Transform:
   m_ObjectHideFlags: 0
@@ -1108,11 +1107,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1644374733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a28362c769fdc243a28793fc198aa4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 21ff57f9ff0b72448b1ab23870478199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  billPanel: {fileID: 1644374733}
-  childPanelPrefab: {fileID: 3609436285147583798, guid: 6130755c1b73bb44b8b158c857c23d79, type: 3}
 --- !u!1 &1678105875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,8 +2016,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2116632594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90013cf3528c1b84bae5f68790480585, type: 3}
+  m_Script: {fileID: 11500000, guid: f92d55a622951824f87694cacc819017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 931919708}
-  shopItemPrefab: {fileID: 2742202125375611496, guid: 2f901b98841ccb843bab8442b2361e21, type: 3}
+  shopItemPrefab: {fileID: 7019076832383859145, guid: 508474b3b913c974482cb4e7b271a65a, type: 3}

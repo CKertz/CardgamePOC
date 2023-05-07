@@ -27,9 +27,6 @@ public class CustomerPatienceScript : MonoBehaviour
     public void StartTimer(TimerType timerType)
     {
         setTimerDuration(timerType);
-        DataManager.Instance.testCounter++;
-        Debug.Log("timer #" + DataManager.Instance.testCounter + " created");
-        personalCountTestNum = DataManager.Instance.testCounter;
         InvokeRepeating("UpdateTimer", 1f, 1f);
     }
 

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PopulateBillPanel : MonoBehaviour
 {
-    public GameObject billPanel;
-    public GameObject childPanelPrefab;
 
     public void incrementCount(GameObject cardToProcess, Dictionary<string,int> quantityCounter)
     {
