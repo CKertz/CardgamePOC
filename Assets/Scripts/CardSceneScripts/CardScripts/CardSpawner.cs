@@ -6,7 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CardSpawnHandler : MonoBehaviour
+public class CardSpawner : MonoBehaviour
 {
     public GameObject cardPrefab;
     public int startingHandCount = 5;
