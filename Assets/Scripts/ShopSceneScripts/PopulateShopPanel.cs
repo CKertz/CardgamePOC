@@ -1,4 +1,5 @@
 using Assets.Models;
+using Assets.Scripts.CardSceneScripts;
 using Models;
 using Newtonsoft.Json;
 using System.Collections;
@@ -11,13 +12,13 @@ public class PopulateShopPanel : MonoBehaviour
     public GameObject shopPanel;
     public GameObject shopItemPrefab; // Reference to the child Panel prefab
 
-
+    private MenuHandler menuHandler = new MenuHandler();
     // Start is called before the first frame update
     void Start()
     {
         shopPanel = GameObject.Find("Shop Item Container");
         GetAvailableShopItemsFromJson();
-        InitializeTodayMenuItems();
+        menuHandler.InitializeTodayMenuItems();
     }
 
     // Update is called once per frame
@@ -54,54 +55,6 @@ public class PopulateShopPanel : MonoBehaviour
         string json = JsonConvert.SerializeObject(shopItemList, Formatting.Indented);
 
         File.WriteAllText(Application.dataPath+"/Models/json/AvailableShopItems.json", json);
-    }
-    void InitializeTodayMenuItems()
-    {
-        //TODO: temporary hardcoding the today ingredients for testing
-        //
-        List<Ingredient> cheeseburgerIngredients = new List<Ingredient>();
-        Ingredient cheese = new Ingredient();
-        cheese.IngredientName = "cheese";
-        cheeseburgerIngredients.Add(cheese);
-
-        Ingredient patty = new Ingredient();
-        cheese.IngredientName = "patty";
-        cheeseburgerIngredients.Add(patty);
-
-        Ingredient bun = new Ingredient();
-        cheese.IngredientName = "bun";
-        cheeseburgerIngredients.Add(bun);
-
-        MenuItem cheeseburger = new MenuItem();
-        cheeseburger.MenuItemName = "Cheeseburger";
-        cheeseburger.MenuItemSpritePath = "MenuItemSprites/cheeseburger";
-        cheeseburger.IngredientList = cheeseburgerIngredients;
-        //
-        List<Ingredient> friesIngredients = new List<Ingredient>();
-        Ingredient potato = new Ingredient();
-        potato.IngredientName = "potato";
-        friesIngredients.Add(potato);
-
-        MenuItem fries = new MenuItem();
-        fries.MenuItemName = "Fries";
-        fries.MenuItemSpritePath = "MenuItemSprites/fries";
-        fries.IngredientList = friesIngredients;
-        //
-        List<Ingredient> drinkIngredients = new List<Ingredient>();
-        Ingredient drinkIngredient = new Ingredient();
-        drinkIngredient.IngredientName = "drink";
-        drinkIngredients.Add(drinkIngredient);
-
-        MenuItem drink = new MenuItem();
-        drink.MenuItemName = "Drink";
-        drink.MenuItemSpritePath = "MenuItemSprites/drink";
-        drink.IngredientList = friesIngredients;
-        //
-        DataManager.Instance.todayMenuItems.Add(cheeseburger);
-        DataManager.Instance.todayMenuItems.Add(fries);
-        DataManager.Instance.todayMenuItems.Add(drink);
-
-
     }
     void GetAvailableShopItemsFromJson()
     {

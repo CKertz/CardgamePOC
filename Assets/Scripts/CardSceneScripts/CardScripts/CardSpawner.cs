@@ -1,4 +1,5 @@
 using Assets.Models;
+using Assets.Scripts.CardSceneScripts;
 using Models;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,9 +17,13 @@ public class CardSpawner : MonoBehaviour
 
     void Start()
     {
-        if(DataManager.Instance == null)
+        var testingDataManager = FindObjectOfType<DataManager>(true);
+
+        if (testingDataManager != null && testingDataManager.gameObject.name == "TestingDataManager")
         {
-            SetupDummyHand();
+            // this should only be hit when we're skipping straight into cardscene for testing
+            Debug.Log("datamanager found with name:" + testingDataManager.gameObject.name);
+            SetupDummyGame();
         }
         for (int i = 0; i < startingHandCount; i++)
         {
@@ -137,11 +142,10 @@ public class CardSpawner : MonoBehaviour
     }
 
     //used to help testing cardscene by filling deck with arbitrary cards
-    private void SetupDummyHand()
+    private void SetupDummyGame()
     {
         var testingDataManager = FindObjectOfType<DataManager>(true);
         
-        //GameObject testingDataManager = GameObject.FindGameObjectWithTag("TestingDataManager");
         if (testingDataManager != null)
         {
             Debug.Log("TestingDataManager found, setting to active");
@@ -154,7 +158,11 @@ public class CardSpawner : MonoBehaviour
                 card.CardSpritePath = deckHandler.lookupCardSpritePathByName("Bun");
                 DataManager.Instance.deck.CardList.Add(card);
             }
+            testingDataManager.gameObject.SetActive(false);
 
+            //Debug.Log("Empty menu, adding MenuHandler.InitializeTodayMenuItems to DataManager");
+            //MenuHandler menuHandler = new MenuHandler();
+            //menuHandler.InitializeTodayMenuItems();
         }
     }
 

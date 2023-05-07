@@ -13,12 +13,8 @@ public class CardController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(transform.name);
         spawnedXCoordinate = transform.localPosition.x;
         spawnedYCoordinate = transform.localPosition.y;
-
-        Debug.Log("x:" + spawnedXCoordinate + " y:" + spawnedYCoordinate);
-
     }
 
     // Update is called once per frame

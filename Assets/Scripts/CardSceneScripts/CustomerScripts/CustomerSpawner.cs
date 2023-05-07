@@ -1,7 +1,9 @@
 using Assets.Models;
+using Assets.Scripts.CardSceneScripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.Events;
@@ -99,6 +101,23 @@ public class CustomerSpawner : MonoBehaviour
         
         //flagging system to prevent the order being multiple of the same item
         Dictionary<MenuItem,bool> uniqueItemTracker = new Dictionary<MenuItem,bool>();
+        if(DataManager.Instance == null)
+        {
+            var testingDataManager = FindObjectOfType<DataManager>(true);
+
+            if (testingDataManager != null)
+            {
+                Debug.Log("TestingDataManager found, setting to active");
+                testingDataManager.gameObject.SetActive(true);
+
+
+                Debug.Log("Empty menu, adding MenuHandler.InitializeTodayMenuItems to DataManager");
+                MenuHandler menuHandler = new MenuHandler();
+                menuHandler.InitializeTodayMenuItems();
+                testingDataManager.gameObject.SetActive(false);
+
+            }
+        }
         foreach(MenuItem item in DataManager.Instance.todayMenuItems)
         {
             uniqueItemTracker.Add(item,true);
