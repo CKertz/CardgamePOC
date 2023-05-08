@@ -1,0 +1,17 @@
+[
+  {
+    "CustomerName": "Al",
+    "CustomerSpritePath": "ShopSprites/bunproto",
+    "FavoriteOrder": 
+  },
+  {
+    "CustomerName": "Betty",
+    "CustomerSpritePath": "ShopSprites/bunproto"
+  },
+  {
+    "CustomerName": "Chris",
+    "CustomerSpritePath": "ShopSprites/bunproto"
+  }
+]
+
+

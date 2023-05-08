@@ -90,7 +90,7 @@ public class CustomerSpawner : MonoBehaviour
             Customer customer = new Customer();
             customer.CustomerOrder = createRandomCustomerOrder();
             customer.CustomerName = "testname";
-            customer.CustomerSpritePath = "MenuItemSprites/fries"; //TODO: just a random placeholder for testing
+            customer.CustomerSpritePath = "CharacterSprites/character1"; //TODO: just a random placeholder for testing
             customerList.Add(customer);
         }
     }
