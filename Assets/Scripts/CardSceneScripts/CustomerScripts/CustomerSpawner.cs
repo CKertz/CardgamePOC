@@ -15,9 +15,8 @@ public class CustomerSpawner : MonoBehaviour
     public int customerCount;
     public GameObject customerPrefab;
     public GameObject timerPrefab;
-    public Transform spawnPoint;
     public float spawnInterval = 15f;
-    Vector3 position = new Vector3(-32, 0, 0);
+    Vector3 customerSpawnPosition = new Vector3(-4.5f, 2.05f, 0);
     private int spawnedCustomerCount = 0;
 
     private List<Customer> customerList;
@@ -53,7 +52,8 @@ public class CustomerSpawner : MonoBehaviour
 
         Sprite randomCustomerSprite = Resources.Load<Sprite>(customerList[spawnedCustomerCount].CustomerSpritePath);
 
-        GameObject spawnedCustomer = Instantiate(customerPrefab, position, Quaternion.identity);
+        GameObject spawnedCustomer = Instantiate(customerPrefab, transform);
+        spawnedCustomer.transform.localPosition = customerSpawnPosition;
         spawnedCustomer.transform.SetParent(transform);
 
         customerSpawnEvent.Invoke();
@@ -64,7 +64,6 @@ public class CustomerSpawner : MonoBehaviour
         SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
         spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
         //spawnPatienceTimer(spawnedCustomer);
-        //add customer's order from customerlist to customer somehow?
         spawnedCustomerCount++;
     }
 
