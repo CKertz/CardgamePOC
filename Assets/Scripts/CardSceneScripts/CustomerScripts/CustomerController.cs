@@ -2,6 +2,7 @@ using Assets.Models;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CustomerController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class CustomerController : MonoBehaviour
     public CustomerPatienceScript customerPatiencePrefab;
     private bool isReadyToOrder = true;
     public Customer customer;
+
+    public UnityEvent customerReadyToOrderEvent;
+    public UnityEvent customerOutOfPatienceEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +38,8 @@ public class CustomerController : MonoBehaviour
         }
         if (distanceMoved >= maxDistance && isReadyToOrder)
         {
-            customerPatiencePrefab.StartTimer(TimerType.OrderTakenPatience);
+            customerReadyToOrderEvent.Invoke();
+            //customerPatiencePrefab.StartTimer(TimerType.OrderTakenPatience);
             isReadyToOrder=false;
         }
     }

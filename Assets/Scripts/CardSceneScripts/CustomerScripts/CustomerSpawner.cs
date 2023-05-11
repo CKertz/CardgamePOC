@@ -1,7 +1,11 @@
 using Assets.Models;
 using Assets.Scripts.CardSceneScripts;
+using Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml;
@@ -20,6 +24,7 @@ public class CustomerSpawner : MonoBehaviour
     private int spawnedCustomerCount = 0;
 
     private List<Customer> customerList;
+    private Dictionary<Customer, bool> spawnedCustomerDictionary = new Dictionary<Customer, bool>();
     void Start()
     {
 
@@ -72,6 +77,7 @@ public class CustomerSpawner : MonoBehaviour
     {
         customerList = new List<Customer>();
 
+        //first, add mandatory force spawned customers
         int currentCustomerCount = 0;
         if (mandatoryCustomers != null)
         {
@@ -82,15 +88,35 @@ public class CustomerSpawner : MonoBehaviour
             }
         }
 
-        for(int i = currentCustomerCount; i < providedCustomerCount; i++)
+        //then, add random selection from namedcustomers pool
+        string filePath = Application.dataPath + "/Models/json/CustomerNameList.json";
+        string json = File.ReadAllText(filePath);
+        List<Customer> customers = JsonConvert.DeserializeObject<List<Customer>>(json);
+        AddNamedCustomersToCustomerList(customers, currentCustomerCount);
+
+        //last, fill the remainder with randos
+        for (int i = currentCustomerCount; i < providedCustomerCount; i++)
         {
             Debug.Log("customer number " + i + " now being created");
             //create customers with orders
             Customer customer = new Customer();
             customer.CustomerOrder = createRandomCustomerOrder();
-            customer.CustomerName = "testname";
-            customer.CustomerSpritePath = "CharacterSprites/character1"; //TODO: just a random placeholder for testing
+            customer.CustomerName = "Rando";//TODO: just a random placeholder for testing
+            customer.CustomerSpritePath = "CharacterSprites/randomcharacter"; 
             customerList.Add(customer);
+        }
+    }
+
+    private void AddNamedCustomersToCustomerList(List<Customer> availableCustomers, int currentCustomerCount)
+    {
+        //for now, we are just going to spawn half of the customers as named customers, and the rest are random
+        while(currentCustomerCount < customerCount / 2)
+        {
+            //grab random entry out of list, remove from available list after so that a duplicate isn't selected
+            Customer randomCustomer = availableCustomers.ElementAt(UnityEngine.Random.Range(0, availableCustomers.Count));
+            customerList.Add(randomCustomer);
+            availableCustomers.Remove(randomCustomer);
+            currentCustomerCount++;
         }
     }
 
@@ -131,10 +157,10 @@ public class CustomerSpawner : MonoBehaviour
                 //Debug.Log(menuItem.MenuItemName);
             }
 
-            int numberOfItemsToOrder = Random.Range(1,DataManager.Instance.todayMenuItems.Count);
+            int numberOfItemsToOrder = UnityEngine.Random.Range(1,DataManager.Instance.todayMenuItems.Count);
             for(int i = 0; i < numberOfItemsToOrder; i++)
             {
-                int randomMenuItemIndex = Random.Range(0, DataManager.Instance.todayMenuItems.Count);
+                int randomMenuItemIndex = UnityEngine.Random.Range(0, DataManager.Instance.todayMenuItems.Count);
                 //Debug.Log("randomMenuItemIndex:" + randomMenuItemIndex);
 
                 if (uniqueItemTracker.ElementAt(randomMenuItemIndex).Value == true)
@@ -150,7 +176,7 @@ public class CustomerSpawner : MonoBehaviour
                 {
                     //TODO: I think we can just remove the if and refactor this to work in all cases?
                     IEnumerable<KeyValuePair<MenuItem, bool>> filtered = uniqueItemTracker.Where(pair => pair.Value == true);
-                    int randomIndex = Random.Range(0, DataManager.Instance.todayMenuItems.Count - 1);
+                    int randomIndex = UnityEngine.Random.Range(0, DataManager.Instance.todayMenuItems.Count - 1);
                     customerOrder.Add(filtered.ElementAt(randomIndex).Key);
 
                     //make item ineligible to be added again to order

@@ -100,3 +100,21 @@ MonoBehaviour:
   speed: 2
   maxDistance: 5
   customerPatiencePrefab: {fileID: 2338301792063183614, guid: 2aa0df1a0bb72594197ae4f481218e71, type: 3}
+  customerReadyToOrderEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  customerOutOfPatienceEvent:
+    m_PersistentCalls:
+      m_Calls: []
