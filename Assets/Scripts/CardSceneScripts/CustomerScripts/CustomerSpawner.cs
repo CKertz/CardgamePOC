@@ -1,4 +1,5 @@
 using Assets.Models;
+using Assets.Scripts;
 using Assets.Scripts.CardSceneScripts;
 using Models;
 using Newtonsoft.Json;
@@ -22,14 +23,14 @@ public class CustomerSpawner : MonoBehaviour
     public float spawnInterval = 15f;
     Vector3 customerSpawnPosition = new Vector3(-4.5f, 2.05f, 0);
     private int spawnedCustomerCount = 0;
+    int currentCustomerCount = 0;
 
     private List<Customer> customerList;
-    private Dictionary<Customer, bool> spawnedCustomerDictionary = new Dictionary<Customer, bool>();
     void Start()
     {
 
         //construct list of customers to be had that day
-        createCustomerList(customerCount);
+        createCustomerList();
         InvokeRepeating("SpawnCustomer", 5f, spawnInterval);
 
     }
@@ -73,12 +74,11 @@ public class CustomerSpawner : MonoBehaviour
     }
 
 
-    private void createCustomerList(int providedCustomerCount, List<Customer> mandatoryCustomers = null)// "mandatory" meaning force spawning particular people
+    private void createCustomerList(List<Customer> mandatoryCustomers = null)// "mandatory" meaning force spawning particular people
     {
         customerList = new List<Customer>();
 
         //first, add mandatory force spawned customers
-        int currentCustomerCount = 0;
         if (mandatoryCustomers != null)
         {
             foreach(var customer in mandatoryCustomers)
@@ -92,12 +92,10 @@ public class CustomerSpawner : MonoBehaviour
         string filePath = Application.dataPath + "/Models/json/CustomerNameList.json";
         string json = File.ReadAllText(filePath);
         List<Customer> customers = JsonConvert.DeserializeObject<List<Customer>>(json);
-        AddNamedCustomersToCustomerList(customers, currentCustomerCount);
-
-        //last, fill the remainder with randos
-        for (int i = currentCustomerCount; i < providedCustomerCount; i++)
+        AddNamedCustomersToCustomerList(customers);
+        //fill the remainder with randos
+        for (int i = currentCustomerCount; i < customerCount; i++)
         {
-            Debug.Log("customer number " + i + " now being created");
             //create customers with orders
             Customer customer = new Customer();
             customer.CustomerOrder = createRandomCustomerOrder();
@@ -105,9 +103,11 @@ public class CustomerSpawner : MonoBehaviour
             customer.CustomerSpritePath = "CharacterSprites/randomcharacter"; 
             customerList.Add(customer);
         }
+
+        Randomizer.ShuffleList(customerList);
     }
 
-    private void AddNamedCustomersToCustomerList(List<Customer> availableCustomers, int currentCustomerCount)
+    private void AddNamedCustomersToCustomerList(List<Customer> availableCustomers)
     {
         //for now, we are just going to spawn half of the customers as named customers, and the rest are random
         while(currentCustomerCount < customerCount / 2)

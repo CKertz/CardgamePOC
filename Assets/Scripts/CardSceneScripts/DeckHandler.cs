@@ -1,4 +1,5 @@
 using Assets.Models;
+using Assets.Scripts;
 using Models;
 using Newtonsoft.Json;
 using System;
@@ -25,7 +26,7 @@ public class DeckHandler
                 cardToCreateCount++;
             }
         }
-        shuffleDeck();
+        Randomizer.ShuffleList(DataManager.Instance.deck.CardList);
     }
 
     public string lookupCardSpritePathByName(string cardName)
@@ -42,22 +43,6 @@ public class DeckHandler
             }
         }
         return null;
-    }
-
-    private void shuffleDeck()
-    {
-        System.Random rand = new System.Random();
-
-        // Shuffle the list using a Fisher-Yates shuffle algorithm
-        int n = DataManager.Instance.deck.CardList.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = rand.Next(n + 1);
-            Card value = DataManager.Instance.deck.CardList[k];
-            DataManager.Instance.deck.CardList[k] = DataManager.Instance.deck.CardList[n];
-            DataManager.Instance.deck.CardList[n] = value;
-        }
     }
 
 }
