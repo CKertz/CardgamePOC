@@ -62,7 +62,7 @@ public class CustomerSpawner : MonoBehaviour
         spawnedCustomer.transform.localPosition = customerSpawnPosition;
         spawnedCustomer.transform.SetParent(transform);
 
-        customerSpawnEvent.Invoke();
+        //customerSpawnEvent.Invoke();
 
         CustomerController spawnedCustomerController = spawnedCustomer.GetComponent<CustomerController>();
         spawnedCustomerController.customer = customerList[spawnedCustomerCount];

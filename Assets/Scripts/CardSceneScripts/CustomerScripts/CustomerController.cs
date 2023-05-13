@@ -10,7 +10,7 @@ public class CustomerController : MonoBehaviour
     public float maxDistance = 5.0f; // the maximum distance to move right in units
     private float distanceMoved = 0.0f; // the distance moved so far
     public CustomerPatienceScript customerPatiencePrefab;
-    private bool isReadyToOrder = true;
+    private bool isReadyToOrder = false;
     public Customer customer;
 
     public UnityEvent customerReadyToOrderEvent;
@@ -36,12 +36,17 @@ public class CustomerController : MonoBehaviour
             // Update the distance moved
             distanceMoved += speed * Time.deltaTime;
         }
-        if (distanceMoved >= maxDistance && isReadyToOrder)
+        if (distanceMoved >= maxDistance && !isReadyToOrder)
         {
             customerReadyToOrderEvent.Invoke();
             //customerPatiencePrefab.StartTimer(TimerType.OrderTakenPatience);
-            isReadyToOrder=false;
+            isReadyToOrder=true;
         }
+    }
+
+    private void OnMouseDown()
+    {
+        customerReadyToOrderEvent.Invoke();
     }
 
 

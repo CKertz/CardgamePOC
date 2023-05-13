@@ -22,6 +22,7 @@ public class TimerScript : MonoBehaviour
     {
         GameObject timerManager = GameObject.FindGameObjectWithTag("DebugOverlayUI");
         timerText.transform.SetParent(timerManager.transform);
+        Debug.Log(currentTime + "second timer made");
     }
 
     // Update is called once per frame
@@ -45,6 +46,11 @@ public class TimerScript : MonoBehaviour
             isFirstCall = false;
         }
         timerText.text = currentTime.ToString("0.00");
+    }
+
+    public void InstantiateTimer()
+    {
+        
     }
 
 

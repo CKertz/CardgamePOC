@@ -515,7 +515,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   customerCount: 5
-  customerPrefab: {fileID: 1923353963646779665, guid: 65e8be157c4671b4c8c7dae04e51129d, type: 3}
+  customerPrefab: {fileID: 2377229926314838155, guid: 55fe4d45f7206df45b0225eb09958d63, type: 3}
   timerPrefab: {fileID: 5154979352014350292, guid: eb96b6fff75bc5b429baebd3bc6bcd15, type: 3}
   spawnInterval: 15
 --- !u!4 &536155527
