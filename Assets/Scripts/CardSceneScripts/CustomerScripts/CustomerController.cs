@@ -9,7 +9,6 @@ public class CustomerController : MonoBehaviour
     public float speed = 2.0f;
     public float maxDistance = 5.0f; // the maximum distance to move right in units
     private float distanceMoved = 0.0f; // the distance moved so far
-    public CustomerPatienceScript customerPatiencePrefab;
     private bool isReadyToOrder = false;
     public Customer customer;
 
@@ -38,8 +37,10 @@ public class CustomerController : MonoBehaviour
         }
         if (distanceMoved >= maxDistance && !isReadyToOrder)
         {
-            customerReadyToOrderEvent.Invoke();
-            //customerPatiencePrefab.StartTimer(TimerType.OrderTakenPatience);
+            //customerReadyToOrderEvent.Invoke();
+            var timer = transform.Find("TimerWaitingToOrder");
+            Debug.Log("timer name:" + timer.name);
+            timer.GetComponent<TimerScript>().readyToBeginTimer = true;
             isReadyToOrder=true;
         }
     }

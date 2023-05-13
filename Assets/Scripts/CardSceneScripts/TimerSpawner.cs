@@ -27,7 +27,9 @@ public class TimerSpawner : MonoBehaviour
     public void SpawnWaitingToOrderTimer()
     {
         Instantiate(timerWaitingToOrderPrefab);
-
+        TimerScript timerScript = timerWaitingForFoodPrefab.GetComponent<TimerScript>();
+        timerScript.readyToBeginTimer = true;
+        Debug.Log("SpawnWaitingForOrderTimer hit, readyToBeginTimer:" + timerScript.readyToBeginTimer);
     }
 
 }

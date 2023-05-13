@@ -17,26 +17,31 @@ public class TimerScript : MonoBehaviour
     public float timerLimit;
     public bool countdown;
     private bool isFirstCall = true;
+    public bool readyToBeginTimer = false;
 
     void Start()
     {
         GameObject timerManager = GameObject.FindGameObjectWithTag("DebugOverlayUI");
         timerText.transform.SetParent(timerManager.transform);
-        Debug.Log(currentTime + "second timer made");
+        Debug.Log("On Start, readyToBeginTimer:"+readyToBeginTimer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTime = countdown ? currentTime -= Time.deltaTime : currentTime += Time.deltaTime;
-        if(hasLimit && ((countdown && currentTime <= timerLimit) || (!countdown && currentTime >= timerLimit)))
+        if(readyToBeginTimer)
         {
-            currentTime = timerLimit;
+            currentTime = countdown ? currentTime -= Time.deltaTime : currentTime += Time.deltaTime;
+            if(hasLimit && ((countdown && currentTime <= timerLimit) || (!countdown && currentTime >= timerLimit)))
+            {
+                currentTime = timerLimit;
+                SetTimerText();
+                timerText.color = Color.red;
+                enabled = false;
+            }
             SetTimerText();
-            timerText.color = Color.red;
-            enabled = false;
         }
-        SetTimerText();
+
     }
 
     private void SetTimerText()
@@ -46,11 +51,6 @@ public class TimerScript : MonoBehaviour
             isFirstCall = false;
         }
         timerText.text = currentTime.ToString("0.00");
-    }
-
-    public void InstantiateTimer()
-    {
-        
     }
 
 

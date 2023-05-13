@@ -19,7 +19,6 @@ public class CustomerSpawner : MonoBehaviour
 
     public int customerCount;
     public GameObject customerPrefab;
-    public GameObject timerPrefab;
     public float spawnInterval = 15f;
     Vector3 customerSpawnPosition = new Vector3(-4.5f, 2.05f, 0);
     private int spawnedCustomerCount = 0;
@@ -35,20 +34,6 @@ public class CustomerSpawner : MonoBehaviour
 
     }
 
-
-    void Update()
-    {
-        
-    }
-
-
-    void spawnPatienceTimer(GameObject parentObject)
-    {
-        GameObject customerPatienceTimerObject = Instantiate(timerPrefab);
-        CustomerPatienceScript timer = customerPatienceTimerObject.GetComponent<CustomerPatienceScript>();
-        customerPatienceTimerObject.transform.SetParent(parentObject.transform);
-    }
-
     private void SpawnCustomer()
     {
         if (spawnedCustomerCount >= customerCount)
@@ -61,6 +46,7 @@ public class CustomerSpawner : MonoBehaviour
         GameObject spawnedCustomer = Instantiate(customerPrefab, transform);
         spawnedCustomer.transform.localPosition = customerSpawnPosition;
         spawnedCustomer.transform.SetParent(transform);
+        spawnedCustomer.name = "Customer" + spawnedCustomerCount;
 
         //customerSpawnEvent.Invoke();
 
@@ -69,7 +55,7 @@ public class CustomerSpawner : MonoBehaviour
 
         SpriteRenderer spawnedCustomerSpriteRenderer = spawnedCustomer.GetComponent<SpriteRenderer>();
         spawnedCustomerSpriteRenderer.sprite = randomCustomerSprite;
-        //spawnPatienceTimer(spawnedCustomer);
+
         spawnedCustomerCount++;
     }
 
