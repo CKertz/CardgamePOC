@@ -344,7 +344,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   customerCount: 5
-  customerPrefab: {fileID: 135159304867033938, guid: ba572d3e2c766c74ea700fd752055f6e, type: 3}
+  customerPrefab: {fileID: 2682920087040294896, guid: 1e2e580ffd5c6db468727e28b557806a, type: 3}
   spawnInterval: 15
 --- !u!4 &536155527
 Transform:

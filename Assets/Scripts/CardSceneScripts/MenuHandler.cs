@@ -26,7 +26,7 @@ namespace Assets.Scripts.CardSceneScripts
 
             MenuItem cheeseburger = new MenuItem();
             cheeseburger.MenuItemName = "Cheeseburger";
-            cheeseburger.MenuItemSpritePath = "MenuItemSprites/cheeseburger";
+            cheeseburger.MenuItemSpritePath = "MenuItemSprites/menuburger";
             cheeseburger.IngredientList = cheeseburgerIngredients;
             //
             List<Ingredient> friesIngredients = new List<Ingredient>();
@@ -36,7 +36,7 @@ namespace Assets.Scripts.CardSceneScripts
 
             MenuItem fries = new MenuItem();
             fries.MenuItemName = "Fries";
-            fries.MenuItemSpritePath = "MenuItemSprites/fries";
+            fries.MenuItemSpritePath = "MenuItemSprites/menufries";
             fries.IngredientList = friesIngredients;
             //
             List<Ingredient> drinkIngredients = new List<Ingredient>();
@@ -46,7 +46,7 @@ namespace Assets.Scripts.CardSceneScripts
 
             MenuItem drink = new MenuItem();
             drink.MenuItemName = "Drink";
-            drink.MenuItemSpritePath = "MenuItemSprites/drink";
+            drink.MenuItemSpritePath = "MenuItemSprites/menudrink";
             drink.IngredientList = friesIngredients;
             //
             DataManager.Instance.todayMenuItems.Add(cheeseburger);

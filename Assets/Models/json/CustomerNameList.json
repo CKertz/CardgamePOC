@@ -3,7 +3,7 @@
   "CustomerName": "Al",
   "CustomerOrder": [
     {
-      "MenuItemSpritePath": "MenuItemSprites/cheeseburger",
+      "MenuItemSpritePath": "MenuItemSprites/menuburger",
       "IngredientList": [
         {
           "IngredientName": "bun"
@@ -18,7 +18,7 @@
       "MenuItemName": "cheeseburger"
     },
     {
-      "MenuItemSpritePath": "MenuItemSprites/fries",
+      "MenuItemSpritePath": "MenuItemSprites/menufries",
       "IngredientList": [
         {
           "IngredientName": "potatoes"
@@ -30,7 +30,7 @@
       "MenuItemName": "fries"
     },
     {
-      "MenuItemSpritePath": "MenuItemSprites/drink",
+      "MenuItemSpritePath": "MenuItemSprites/menudrink",
       "IngredientList": [
         {
           "IngredientName": "drink"
@@ -45,7 +45,7 @@
   "CustomerName": "Bradley",
   "CustomerOrder": [
     {
-      "MenuItemSpritePath": "MenuItemSprites/fries",
+      "MenuItemSpritePath": "MenuItemSprites/menufries",
       "IngredientList": [
         {
           "IngredientName": "potatoes"
@@ -57,7 +57,7 @@
       "MenuItemName": "fries"
     },
     {
-      "MenuItemSpritePath": "MenuItemSprites/drink",
+      "MenuItemSpritePath": "MenuItemSprites/menudrink",
       "IngredientList": [
         {
           "IngredientName": "drink"
@@ -72,7 +72,7 @@
   "CustomerName": "Chris",
   "CustomerOrder": [
     {
-      "MenuItemSpritePath": "MenuItemSprites/cheeseburger",
+      "MenuItemSpritePath": "MenuItemSprites/menuburger",
       "IngredientList": [
         {
           "IngredientName": "bun"
@@ -87,7 +87,7 @@
       "MenuItemName": "cheeseburger"
     },
     {
-      "MenuItemSpritePath": "MenuItemSprites/drink",
+      "MenuItemSpritePath": "MenuItemSprites/menudrink",
       "IngredientList": [
         {
           "IngredientName": "drink"

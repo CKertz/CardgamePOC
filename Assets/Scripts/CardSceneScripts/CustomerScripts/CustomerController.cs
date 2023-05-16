@@ -1,6 +1,7 @@
 using Assets.Models;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,9 +12,6 @@ public class CustomerController : MonoBehaviour
     private float distanceMoved = 0.0f; // the distance moved so far
     private bool isReadyToOrder = false;
     public Customer customer;
-
-    public UnityEvent customerReadyToOrderEvent;
-    public UnityEvent customerOutOfPatienceEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +35,7 @@ public class CustomerController : MonoBehaviour
         }
         if (distanceMoved >= maxDistance && !isReadyToOrder)
         {
-            //customerReadyToOrderEvent.Invoke();
+            //get child item by name on Customer
             var timer = transform.Find("TimerWaitingToOrder");
             Debug.Log("timer name:" + timer.name);
             timer.GetComponent<TimerScript>().readyToBeginTimer = true;
@@ -47,7 +45,36 @@ public class CustomerController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        customerReadyToOrderEvent.Invoke();
+        // start taking order
+        // start waitingforfood timer
+        var orderPrefab = transform.Find("prefab_CustomerOrder");
+        var orderBackgroundObject = orderPrefab.transform.Find("OrderBackground");
+        var orderBackgroundSprite = orderBackgroundObject.GetComponent<SpriteRenderer>();
+
+        orderBackgroundSprite.enabled = true;
+        orderBackgroundSprite.transform.localPosition = new Vector3(4, 0.1f);
+
+
+        var orderScript = orderPrefab.GetComponent<OrderController>();
+        var orderItemSprites = new List<string>();
+        orderItemSprites = orderScript.GetOrderItemSprites(customer);
+        
+        for(int i = 0; i < orderItemSprites.Count; i++)
+        {
+            int indexHolder = i + 1; //this is stupid but if you concatenate OrderItem + (i+1), it will be OrderItem01, OrderItem11, OrderItem21, ....
+            var currentOrderItem = orderBackgroundObject.transform.Find("OrderItem" + indexHolder).GetComponent<SpriteRenderer>();
+            currentOrderItem.enabled = true;
+
+            Debug.Log("currentorderitem:" + currentOrderItem.name);
+            if (currentOrderItem != null)
+            {
+                Debug.Log("spritepath:"+orderItemSprites[i]);
+                Sprite sprite = Resources.Load<Sprite>(orderItemSprites[i]);
+                currentOrderItem.sprite = sprite;
+
+            }
+        }
+
     }
 
 
