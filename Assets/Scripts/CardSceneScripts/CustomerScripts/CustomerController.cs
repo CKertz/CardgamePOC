@@ -61,8 +61,8 @@ public class CustomerController : MonoBehaviour
         
         for(int i = 0; i < orderItemSprites.Count; i++)
         {
-            int indexHolder = i + 1; //this is stupid but if you concatenate OrderItem + (i+1), it will be OrderItem01, OrderItem11, OrderItem21, ....
-            var currentOrderItem = orderBackgroundObject.transform.Find("OrderItem" + indexHolder).GetComponent<SpriteRenderer>();
+            Debug.Log("OrderItem" + i);
+            var currentOrderItem = orderBackgroundObject.transform.Find("OrderItem" + i).GetComponent<SpriteRenderer>();
             currentOrderItem.enabled = true;
 
             Debug.Log("currentorderitem:" + currentOrderItem.name);

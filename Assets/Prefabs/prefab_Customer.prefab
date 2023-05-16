@@ -249,6 +249,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4240686773513467389, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+      propertyPath: m_Name
+      value: OrderItem2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4491245402851765138, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+      propertyPath: m_Name
+      value: OrderItem0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495210168935121076, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+      propertyPath: m_Name
+      value: OrderItem1
+      objectReference: {fileID: 0}
     - target: {fileID: 6057590028907314475, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
       propertyPath: m_Enabled
       value: 0
