@@ -132,7 +132,7 @@ public class CustomerController : MonoBehaviour
         for(int i = 0; i < customer.CustomerOrder.Count; i++)
         {
             var currentOrderItem = orderPrefab.transform.Find("OrderItem" + i).GetComponent<SpriteRenderer>();
-            currentOrderItem.sortingOrder = 2;
+            currentOrderItem.sortingOrder = 3;
         }
     }
 
