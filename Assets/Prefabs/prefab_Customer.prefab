@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7734275223769973955, guid: b57d3a7e68a627646ae6e90dbde8bd92, type: 3}
+      propertyPath: waitingForFoodTime
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b57d3a7e68a627646ae6e90dbde8bd92, type: 3}
 --- !u!4 &2724343625515129462 stripped
@@ -200,6 +204,14 @@ PrefabInstance:
     - target: {fileID: 751254181973983504, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012783160840913698, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012783160840913698, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+      propertyPath: m_Size.y
+      value: 0.32
       objectReference: {fileID: 0}
     - target: {fileID: 2316847416688840731, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
       propertyPath: m_RootOrder

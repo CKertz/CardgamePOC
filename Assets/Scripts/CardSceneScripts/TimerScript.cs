@@ -18,6 +18,7 @@ public class TimerScript : MonoBehaviour
     public bool countdown;
     private bool isFirstCall = true;
     public bool readyToBeginTimer = false;
+    public float waitingForFoodTime;
 
     void Start()
     {
@@ -51,6 +52,11 @@ public class TimerScript : MonoBehaviour
             isFirstCall = false;
         }
         timerText.text = currentTime.ToString("0.00");
+    }
+
+    public void SetWaitingForFoodTimer()
+    {
+        currentTime = waitingForFoodTime;
     }
 
 

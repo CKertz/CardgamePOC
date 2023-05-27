@@ -51,19 +51,23 @@ public class CustomerController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        // start taking order
-        // start waitingforfood timer
+        // start taking order. need to add it to a ticket, start the waitingforfoodtimer, and move customer out of scene
         var orderPrefab = transform.Find("prefab_CustomerOrder");
         var orderScript = orderPrefab.GetComponent<OrderController>();
+
         orderScript.EnableOrder(orderPrefab, customer);
 
-        StartCoroutine(MoveCustomerCoroutine(orderScript));
+        StartCoroutine(MoveCustomerCoroutine(orderPrefab));
         orderPrefab.SetParent(null);
+
+        var timerScript = transform.Find("TimerWaitingToOrder").GetComponent<TimerScript>();
+        timerScript.SetWaitingForFoodTimer();
     }
 
-    private IEnumerator MoveCustomerCoroutine(OrderController orderScript)
+    private IEnumerator MoveCustomerCoroutine(Transform orderPrefab)
     {
-        var orderPrefab = transform.Find("prefab_CustomerOrder");
+        var orderScript = orderPrefab.GetComponent<OrderController>();
+
         while (transform.localPosition.x > -4)
         {
             Vector3 newPosition = transform.position + Vector3.left * speed * Time.deltaTime;

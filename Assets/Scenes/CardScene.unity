@@ -159,6 +159,7 @@ MonoBehaviour:
   timerLimit: 0
   countdown: 1
   readyToBeginTimer: 0
+  waitingForFoodTime: 0
 --- !u!4 &4284084
 Transform:
   m_ObjectHideFlags: 0

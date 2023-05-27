@@ -1,4 +1,5 @@
 using Assets.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,21 @@ public class OrderController : MonoBehaviour
 {
     public int orderItems = 3;
     public float speed = 2.0f;
+    private bool isEnlarged = false;
+    private void OnMouseDown()
+    {
+        Debug.Log("clicked");
+        if(isEnlarged)
+        {
+            transform.localScale = new Vector3(0.25f, 0.25f);
+            isEnlarged = false;
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1f);
+            isEnlarged = true;
+        }
+    }
 
     public List<string> GetOrderItemSprites(Customer customer)
     {
@@ -14,7 +30,6 @@ public class OrderController : MonoBehaviour
         foreach(MenuItem menuItem in customer.CustomerOrder)
         {
             customerOrderItemSprites.Add(menuItem.MenuItemSpritePath);
-            Debug.Log("sprite item path: " +  menuItem.MenuItemSpritePath);
         }
         return customerOrderItemSprites;
     }
@@ -23,14 +38,11 @@ public class OrderController : MonoBehaviour
     {
         for (int i = 0; i < orderItemSprites.Count; i++)
         {
-            Debug.Log("OrderItem" + i);
             var currentOrderItem = orderBackgroundObject.transform.Find("OrderItem" + i).GetComponent<SpriteRenderer>();
             currentOrderItem.enabled = true;
 
-            Debug.Log("currentorderitem:" + currentOrderItem.name);
             if (currentOrderItem != null)
             {
-                Debug.Log("spritepath:" + orderItemSprites[i]);
                 Sprite sprite = Resources.Load<Sprite>(orderItemSprites[i]);
                 currentOrderItem.sprite = sprite;
 
@@ -46,11 +58,12 @@ public class OrderController : MonoBehaviour
 
     private IEnumerator MoveOrderCoroutine(Transform orderPrefab)
     {
-        while (orderPrefab.transform.localPosition.x < -5f)
+        Debug.Log(orderPrefab.name + ", x="+ orderPrefab.position.x);
+        while (orderPrefab.transform.position.x < 1f)
         {
             Vector3 newPosition = orderPrefab.position + Vector3.right * speed * Time.deltaTime * 1.2f;
             orderPrefab.transform.position = newPosition;
-
+            Debug.Log(orderPrefab.position.x);
             yield return null;
 
         }
@@ -60,12 +73,12 @@ public class OrderController : MonoBehaviour
     private void OnOrderOutOfSceneFinished(Transform orderPrefab)
     {
         orderPrefab.localScale = new Vector3(0.25f, 0.25f);
-        orderPrefab.localPosition = new Vector3(-2.04f, 0.43f);
-        var background = orderPrefab.transform.Find("OrderBackground");
-        var backgroundSprite = background.GetComponent<SpriteRenderer>();
+        isEnlarged = false;
+        orderPrefab.localPosition = new Vector3(-1f, 0.43f);
+        var backgroundSprite = GetComponent<SpriteRenderer>();
         backgroundSprite.sortingOrder = 2;
 
-        AdjustOrderItemIconSortingOrder(background);
+        AdjustOrderItemIconSortingOrder(transform);
     }
     private void AdjustOrderItemIconSortingOrder(Transform orderPrefab)
     {
@@ -78,14 +91,13 @@ public class OrderController : MonoBehaviour
 
     public void EnableOrder(Transform orderPrefab, Customer customer)
     {
-        var orderBackgroundObject = orderPrefab.transform.Find("OrderBackground");
-        var orderBackgroundSprite = orderBackgroundObject.GetComponent<SpriteRenderer>();
+        var orderBackgroundSprite = transform.GetComponent<SpriteRenderer>();
 
         orderBackgroundSprite.enabled = true;
-        orderBackgroundSprite.transform.localPosition = new Vector3(4, 0.1f);
+        orderBackgroundSprite.transform.localPosition = new Vector3(1, 0.1f);
 
         var orderItemSprites = GetOrderItemSprites(customer);
-        LoadOrderItemSprites(orderItemSprites, orderBackgroundObject);
+        LoadOrderItemSprites(orderItemSprites, transform);
     }
 
 }
