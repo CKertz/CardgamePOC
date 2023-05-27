@@ -8,23 +8,70 @@ public class OrderController : MonoBehaviour
 {
     public int orderItems = 3;
     public float speed = 2.0f;
+    public bool isOnSpike = false;
     private bool isEnlarged = false;
     private bool isClickable = false;
+    private Vector3 mousePostiionOffset;
+    private float originalYCoordinate;
+    private float originalXCoordinate;
+
+    void Start()
+    {
+        originalXCoordinate = transform.localPosition.x;
+        originalYCoordinate = transform.localPosition.y;
+    }
+
+    private void OnMouseOver()
+    {
+        if(!isOnSpike)
+        {
+            transform.localScale = new Vector3(0.75f, 0.75f);
+            isEnlarged = true;
+        }
+
+    }
+
+    private void OnMouseExit()
+    {
+        transform.localScale = new Vector3(0.25f, 0.25f);
+        isEnlarged = false;
+    }
+
+    private Vector3 GetMouseWorldPosition()
+    {
+        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
     private void OnMouseDown()
     {
-        if(isClickable)
+        mousePostiionOffset = gameObject.transform.position - GetMouseWorldPosition();
+    }
+
+    private void OnMouseDrag()
+    {
+        transform.position = GetMouseWorldPosition() + mousePostiionOffset;
+        if (transform.localPosition.y > -0.3)
         {
-            if(isEnlarged)
-            {
-                transform.localScale = new Vector3(0.25f, 0.25f);
-                isEnlarged = false;
-            }
-            else
-            {
-                transform.localScale = new Vector3(1, 1f);
-                isEnlarged = true;
-            }
+            //Debug.Log("in consume zone");
         }
+    }
+
+    private void OnMouseUp()
+    {
+        Debug.Log("onmouse up, isonspike:" + isOnSpike);
+        if(isOnSpike)
+        {
+            gameObject.transform.localScale = new Vector3(0.1f, 0.1f);
+        }
+        //if is in collider of the ticket spike, delete and trigger event for order completed
+        //if (/*remove this and add if collided with ticketspike boxcollider*/transform.localPosition.y > -0.4)
+        //{
+        //    Destroy(gameObject);
+        //}
+        //else
+        //{
+        //    transform.localPosition = new Vector3(originalXCoordinate, originalYCoordinate);
+        //}
     }
 
     public List<string> GetOrderItemSprites(Customer customer)
@@ -76,8 +123,9 @@ public class OrderController : MonoBehaviour
         orderPrefab.localScale = new Vector3(0.25f, 0.25f);
         isEnlarged = false;
         isClickable = true;
+        transform.GetComponent<BoxCollider2D>().enabled = true;
         DataManager.Instance.acceptedOrderCount++;
-        var xPosition = -1.25f + (0.25f * DataManager.Instance.acceptedOrderCount);
+        var xPosition = -0.8f + (0.25f * DataManager.Instance.acceptedOrderCount);
         Debug.Log("order count:" + DataManager.Instance.acceptedOrderCount + ",x position:"+xPosition);
 
         orderPrefab.localPosition = new Vector3(xPosition, 0.43f);
@@ -105,5 +153,4 @@ public class OrderController : MonoBehaviour
         var orderItemSprites = GetOrderItemSprites(customer);
         LoadOrderItemSprites(orderItemSprites, transform);
     }
-
 }
