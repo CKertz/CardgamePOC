@@ -9,6 +9,7 @@ public class DataManager : MonoBehaviour
     public Deck deck = new Deck();
     public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
     public List<MenuItem> todayMenuItems = new List<MenuItem>();
+    public int acceptedOrderCount = 0;
 
     private void Awake()
     {

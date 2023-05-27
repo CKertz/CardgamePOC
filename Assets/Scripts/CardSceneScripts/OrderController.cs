@@ -9,18 +9,21 @@ public class OrderController : MonoBehaviour
     public int orderItems = 3;
     public float speed = 2.0f;
     private bool isEnlarged = false;
+    private bool isClickable = false;
     private void OnMouseDown()
     {
-        Debug.Log("clicked");
-        if(isEnlarged)
+        if(isClickable)
         {
-            transform.localScale = new Vector3(0.25f, 0.25f);
-            isEnlarged = false;
-        }
-        else
-        {
-            transform.localScale = new Vector3(1, 1f);
-            isEnlarged = true;
+            if(isEnlarged)
+            {
+                transform.localScale = new Vector3(0.25f, 0.25f);
+                isEnlarged = false;
+            }
+            else
+            {
+                transform.localScale = new Vector3(1, 1f);
+                isEnlarged = true;
+            }
         }
     }
 
@@ -58,12 +61,10 @@ public class OrderController : MonoBehaviour
 
     private IEnumerator MoveOrderCoroutine(Transform orderPrefab)
     {
-        Debug.Log(orderPrefab.name + ", x="+ orderPrefab.position.x);
         while (orderPrefab.transform.position.x < 1f)
         {
             Vector3 newPosition = orderPrefab.position + Vector3.right * speed * Time.deltaTime * 1.2f;
             orderPrefab.transform.position = newPosition;
-            Debug.Log(orderPrefab.position.x);
             yield return null;
 
         }
@@ -74,7 +75,12 @@ public class OrderController : MonoBehaviour
     {
         orderPrefab.localScale = new Vector3(0.25f, 0.25f);
         isEnlarged = false;
-        orderPrefab.localPosition = new Vector3(-1f, 0.43f);
+        isClickable = true;
+        DataManager.Instance.acceptedOrderCount++;
+        var xPosition = -1.25f + (0.25f * DataManager.Instance.acceptedOrderCount);
+        Debug.Log("order count:" + DataManager.Instance.acceptedOrderCount + ",x position:"+xPosition);
+
+        orderPrefab.localPosition = new Vector3(xPosition, 0.43f);
         var backgroundSprite = GetComponent<SpriteRenderer>();
         backgroundSprite.sortingOrder = 2;
 
