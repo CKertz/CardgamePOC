@@ -10,6 +10,8 @@ public class DataManager : MonoBehaviour
     public Dictionary<string, int> quantityCounter = new Dictionary<string, int>();
     public List<MenuItem> todayMenuItems = new List<MenuItem>();
     public int acceptedOrderCount = 0;
+    public List<Customer> servedCustomers = new List<Customer>();
+    public List<Customer> unservedCustomers = new List<Customer>();
 
     private void Awake()
     {

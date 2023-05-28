@@ -39,6 +39,7 @@ public class TimerScript : MonoBehaviour
                 SetTimerText();
                 timerText.color = Color.red;
                 enabled = false;
+                transform.parent.GetComponent<CustomerController>().HandleLeavingCustomerUnserved(); 
             }
             SetTimerText();
         }

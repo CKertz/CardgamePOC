@@ -79,4 +79,11 @@ public class CustomerController : MonoBehaviour
         }
         orderScript.OnCustomerOutOfSceneFinished(orderPrefab);
     }
+
+    public void HandleLeavingCustomerUnserved()
+    {
+        Debug.Log("HandleLeavingCustomerUnserved for customer:" + customer.CustomerName);
+        DataManager.Instance.unservedCustomers.Add(customer);
+        Destroy(this.gameObject);
+    }
 }
