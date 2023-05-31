@@ -5,19 +5,26 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class CustomerController : MonoBehaviour
 {
     public float speed = 2.0f;
     public float maxDistance = 5.0f; // the maximum distance to move right in units
     private float distanceMoved = 0.0f; // the distance moved so far
+    private float xPosition;
+    private float customerSpacing = 0.4f;
     private bool isReadyToOrder = false;
     private bool isCustomerInScene = false;
     public Customer customer;
+    public UnityEvent OnCustomerDeleted;
 
     // Start is called before the first frame update
     void Start()
     {
+        xPosition = maxDistance - (customerSpacing * DataManager.Instance.spawnedCustomerCount);
+        DataManager.Instance.spawnedCustomerCount++;
+        DataManager.Instance.customerXPositionTracker.Add(gameObject, xPosition);
         foreach (var item in customer.CustomerOrder) 
         {
             Debug.Log(item.MenuItemName);
@@ -29,7 +36,7 @@ public class CustomerController : MonoBehaviour
     {
         if(!isCustomerInScene)
         {
-            if (distanceMoved < maxDistance)
+            if (distanceMoved < xPosition)
             {
                 // Move the gameobject horizontally
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
@@ -37,7 +44,7 @@ public class CustomerController : MonoBehaviour
                 // Update the distance moved
                 distanceMoved += speed * Time.deltaTime;
             }
-            if (distanceMoved >= maxDistance && !isReadyToOrder)
+            if (distanceMoved >= xPosition && !isReadyToOrder)
             {
                 //get child item by name on Customer
                 var timer = transform.Find("TimerWaitingToOrder");
@@ -77,13 +84,63 @@ public class CustomerController : MonoBehaviour
             yield return null;
 
         }
+        DataManager.Instance.customerXPositionTracker[gameObject] = transform.position.x;
         orderScript.OnCustomerOutOfSceneFinished(orderPrefab);
+
+        if(!customer.OrderTaken)
+        {
+            Debug.Log("order not taken");
+            //DataManager.Instance.unservedCustomers.Add(customer);
+            DataManager.Instance.customerXPositionTracker.Remove(gameObject);
+            MoveRemainingCustomersInLine(this.gameObject.transform.position);
+            Destroy(this.gameObject);
+            OnCustomerDeleted.Invoke();
+        }
     }
 
     public void HandleLeavingCustomerUnserved()
     {
+        var orderPrefab = transform.Find("prefab_CustomerOrder");
+        StartCoroutine(MoveCustomerCoroutine(orderPrefab));
+
         Debug.Log("HandleLeavingCustomerUnserved for customer:" + customer.CustomerName);
+        customer.OrderTaken = false;
         DataManager.Instance.unservedCustomers.Add(customer);
-        Destroy(this.gameObject);
+    }
+
+    public void MoveRemainingCustomersInLine(Vector3 removedCustomerCoordinates)
+    {
+        Debug.Log("move remaining customers called---");
+        Debug.Log("removedCustomerXcoord" + removedCustomerCoordinates.x);
+        foreach(KeyValuePair<GameObject,float> customer in DataManager.Instance.customerXPositionTracker)
+        {
+            Debug.Log("customer position for:" + customer.Key.name + "---" + customer.Key.transform.position.x);
+            Debug.Log("customer.Value:" + customer.Value);
+            if(customer.Value > removedCustomerCoordinates.x)
+            {
+                //move them forward
+                var newXValue = customer.Key.transform.position.x + customerSpacing;
+                customer.Key.transform.position = new Vector3(newXValue, customer.Key.transform.position.y);
+                Debug.Log("moving customers");
+                //StartCoroutine(MoveCustomerForwardInLine(customer.Key));
+            }    
+        }
+    }
+
+    private IEnumerator MoveCustomerForwardInLine(GameObject customerObject)
+    {
+        Debug.Log("moving customer"+ customerObject.name +"forward to x:"+ customerObject.transform.localPosition.x + customerSpacing);
+        var test = customerObject.transform.localPosition.x + customerSpacing;
+        Debug.Log("test:" + test);
+        Debug.Log("original:" + customerObject.transform.localPosition.x);
+        while (customerObject.transform.localPosition.x < customerObject.transform.localPosition.x + customerSpacing)
+        {
+            Vector3 newPosition = customerObject.transform.position + Vector3.right * speed * Time.deltaTime;
+
+            customerObject.transform.position = newPosition;
+
+            yield return null;
+
+        }
     }
 }

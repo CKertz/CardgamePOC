@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2724343625515129462}
-  - {fileID: 6333841062218454135}
+  - {fileID: 8935621603369951364}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,6 +102,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   maxDistance: 5
+  OnCustomerDeleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6425343757197085068}
+        m_TargetAssemblyTypeName: OrderController, Assembly-CSharp
+        m_MethodName: RemoveOrder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &4821937080283322623
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -205,6 +220,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 846956080188187880, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1012783160840913698, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
       propertyPath: m_Size.x
       value: 0.32
@@ -291,8 +310,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
---- !u!4 &6333841062218454135 stripped
+--- !u!114 &6425343757197085068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3380552449488375264, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+  m_PrefabInstance: {fileID: 8629260343754179692}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2fb9397c5d59f944abc4a4118e8be19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &8935621603369951364 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2316847416688840731, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
+  m_CorrespondingSourceObject: {fileID: 846956080188187880, guid: e26d8d1d18a029f458e7ab8e1d2f26b1, type: 3}
   m_PrefabInstance: {fileID: 8629260343754179692}
   m_PrefabAsset: {fileID: 0}

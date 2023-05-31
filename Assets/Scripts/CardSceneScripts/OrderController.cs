@@ -153,4 +153,9 @@ public class OrderController : MonoBehaviour
         var orderItemSprites = GetOrderItemSprites(customer);
         LoadOrderItemSprites(orderItemSprites, transform);
     }
+
+    public void RemoveOrder()
+    {
+        Destroy(this.gameObject);
+    }
 }

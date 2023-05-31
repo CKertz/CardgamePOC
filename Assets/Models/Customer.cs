@@ -11,5 +11,6 @@ namespace Assets.Models
         public string CustomerName { get; set; }
         public List<MenuItem> CustomerOrder { get; set; }
         public string CustomerSpritePath { get; set; }
+        public bool OrderTaken { get; set; }
     }
 }
