@@ -62,6 +62,7 @@ public class OrderController : MonoBehaviour
         if(isOnSpike)
         {
             gameObject.transform.localScale = new Vector3(0.1f, 0.1f);
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
         //if is in collider of the ticket spike, delete and trigger event for order completed
         //if (/*remove this and add if collided with ticketspike boxcollider*/transform.localPosition.y > -0.4)
