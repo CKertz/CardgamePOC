@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4821937080283322623}
   m_Layer: 0
   m_Name: prefab_Customer
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,6 +117,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnCustomerOrderTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1569572566182845677}
+        m_TargetAssemblyTypeName: CustomerController, Assembly-CSharp
+        m_MethodName: HandleFrontOfLineCustomerBoxCollider
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2682920087040294896}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &4821937080283322623
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -124,7 +139,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2682920087040294896}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

@@ -12,5 +12,6 @@ namespace Assets.Models
         public List<MenuItem> CustomerOrder { get; set; }
         public string CustomerSpritePath { get; set; }
         public bool OrderTaken { get; set; }
+        public bool IsFrontOfLine = true;
     }
 }

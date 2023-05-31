@@ -430,7 +430,7 @@ MonoBehaviour:
         m_CallState: 2
   customerCount: 5
   customerPrefab: {fileID: 2682920087040294896, guid: 1e2e580ffd5c6db468727e28b557806a, type: 3}
-  spawnInterval: 15
+  spawnInterval: 5
 --- !u!4 &536155527
 Transform:
   m_ObjectHideFlags: 0
@@ -733,6 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceptedOrderCount: 0
+  currentCustomerInLineCount: 0
 --- !u!4 &948596119
 Transform:
   m_ObjectHideFlags: 0

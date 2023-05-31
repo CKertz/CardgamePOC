@@ -101,7 +101,6 @@ public class OrderController : MonoBehaviour
     }
     public void OnCustomerOutOfSceneFinished(Transform orderPrefab)
     {
-        Debug.Log(orderPrefab.name);
         orderPrefab.SetParent(null);
         StartCoroutine(MoveOrderCoroutine(orderPrefab));
     }

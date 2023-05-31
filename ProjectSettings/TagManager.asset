@@ -9,6 +9,8 @@ TagManager:
   - BillCostText
   - TimerManager
   - DebugOverlayUI
+  - Customer
+  - Customer_OrderTaken
   layers:
   - Default
   - TransparentFX

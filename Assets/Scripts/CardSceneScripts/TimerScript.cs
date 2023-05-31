@@ -24,7 +24,6 @@ public class TimerScript : MonoBehaviour
     {
         GameObject timerManager = GameObject.FindGameObjectWithTag("DebugOverlayUI");
         timerText.transform.SetParent(timerManager.transform);
-        Debug.Log("On Start, readyToBeginTimer:"+readyToBeginTimer);
     }
 
     // Update is called once per frame
