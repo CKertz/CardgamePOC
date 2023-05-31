@@ -9,16 +9,13 @@ public class OrderController : MonoBehaviour
     public int orderItems = 3;
     public float speed = 2.0f;
     public bool isOnSpike = false;
-    private bool isEnlarged = false;
-    private bool isClickable = false;
     private Vector3 mousePostiionOffset;
-    private float originalYCoordinate;
-    private float originalXCoordinate;
+    private float ticketRackOriginalXCoordinate;
+    private float ticketRackOriginalYCoordinate = 0.43f;
 
     void Start()
     {
-        originalXCoordinate = transform.localPosition.x;
-        originalYCoordinate = transform.localPosition.y;
+
     }
 
     private void OnMouseOver()
@@ -26,7 +23,6 @@ public class OrderController : MonoBehaviour
         if(!isOnSpike)
         {
             transform.localScale = new Vector3(0.75f, 0.75f);
-            isEnlarged = true;
         }
 
     }
@@ -34,7 +30,6 @@ public class OrderController : MonoBehaviour
     private void OnMouseExit()
     {
         transform.localScale = new Vector3(0.25f, 0.25f);
-        isEnlarged = false;
     }
 
     private Vector3 GetMouseWorldPosition()
@@ -63,6 +58,12 @@ public class OrderController : MonoBehaviour
         {
             gameObject.transform.localScale = new Vector3(0.1f, 0.1f);
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
+        else
+        {
+            //snap back to original location
+            transform.localPosition = new Vector3(ticketRackOriginalXCoordinate, ticketRackOriginalYCoordinate);
+
         }
         //if is in collider of the ticket spike, delete and trigger event for order completed
         //if (/*remove this and add if collided with ticketspike boxcollider*/transform.localPosition.y > -0.4)
@@ -121,13 +122,11 @@ public class OrderController : MonoBehaviour
     private void OnOrderOutOfSceneFinished(Transform orderPrefab)
     {
         orderPrefab.localScale = new Vector3(0.25f, 0.25f);
-        isEnlarged = false;
-        isClickable = true;
         transform.GetComponent<BoxCollider2D>().enabled = true;
         DataManager.Instance.acceptedOrderCount++;
         var xPosition = -0.8f + (0.25f * DataManager.Instance.acceptedOrderCount);
         Debug.Log("order count:" + DataManager.Instance.acceptedOrderCount + ",x position:"+xPosition);
-
+        ticketRackOriginalXCoordinate = xPosition;
         orderPrefab.localPosition = new Vector3(xPosition, 0.43f);
         var backgroundSprite = GetComponent<SpriteRenderer>();
         backgroundSprite.sortingOrder = 2;

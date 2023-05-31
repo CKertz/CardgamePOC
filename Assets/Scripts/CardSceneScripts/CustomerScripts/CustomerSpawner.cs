@@ -21,7 +21,6 @@ public class CustomerSpawner : MonoBehaviour
     public GameObject customerPrefab;
     public float spawnInterval = 15f;
     Vector3 customerSpawnPosition = new Vector3(-4.5f, 2.05f, 0);
-    //TODO: convert customer counters to use datamanger versions
     private int spawnedCustomerCount = 0;
     int currentCustomerCount = 0;
 
