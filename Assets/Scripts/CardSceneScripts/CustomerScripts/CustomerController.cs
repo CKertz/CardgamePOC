@@ -65,6 +65,7 @@ public class CustomerController : MonoBehaviour
         orderScript.EnableOrder(orderPrefab, customer);
 
         StartCoroutine(MoveCustomerCoroutine(orderPrefab));
+        customer.OrderTaken = true;
         orderPrefab.SetParent(null);
 
         var timerScript = transform.Find("TimerWaitingToOrder").GetComponent<TimerScript>();
@@ -122,25 +123,7 @@ public class CustomerController : MonoBehaviour
                 var newXValue = customer.Key.transform.position.x + customerSpacing;
                 customer.Key.transform.position = new Vector3(newXValue, customer.Key.transform.position.y);
                 Debug.Log("moving customers");
-                //StartCoroutine(MoveCustomerForwardInLine(customer.Key));
             }    
-        }
-    }
-
-    private IEnumerator MoveCustomerForwardInLine(GameObject customerObject)
-    {
-        Debug.Log("moving customer"+ customerObject.name +"forward to x:"+ customerObject.transform.localPosition.x + customerSpacing);
-        var test = customerObject.transform.localPosition.x + customerSpacing;
-        Debug.Log("test:" + test);
-        Debug.Log("original:" + customerObject.transform.localPosition.x);
-        while (customerObject.transform.localPosition.x < customerObject.transform.localPosition.x + customerSpacing)
-        {
-            Vector3 newPosition = customerObject.transform.position + Vector3.right * speed * Time.deltaTime;
-
-            customerObject.transform.position = newPosition;
-
-            yield return null;
-
         }
     }
 }
