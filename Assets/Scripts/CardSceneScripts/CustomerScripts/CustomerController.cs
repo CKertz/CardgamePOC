@@ -66,6 +66,7 @@ public class CustomerController : MonoBehaviour
 
         StartCoroutine(MoveCustomerCoroutine(orderPrefab));
         customer.OrderTaken = true;
+        MoveRemainingCustomersInLine(transform.position);
         orderPrefab.SetParent(null);
 
         var timerScript = transform.Find("TimerWaitingToOrder").GetComponent<TimerScript>();
