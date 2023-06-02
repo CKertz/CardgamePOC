@@ -12,7 +12,8 @@ public class CardSpawner : MonoBehaviour
 {
     public GameObject cardPrefab;
     public int startingHandCount = 5;
-    private float spacing = 0.5f;
+    private float spacing = 0.25f;
+    private float cardSpawnYCoordinate = 1.0f;
 
 
     void Start()
@@ -26,10 +27,8 @@ public class CardSpawner : MonoBehaviour
             SetupDummyGame();
         }
         for (int i = 0; i < startingHandCount; i++)
-        {
-            //Debug.Log(i * spacing);
-            //TODO: this position formula is terrible but will get the job done for now
-            Vector3 position = transform.position + Vector3.right * (i * spacing) + Vector3.down * 0.8f + Vector3.left * 1.75f; 
+        {            
+            Vector3 position = transform.position + Vector3.right * (i * spacing) + Vector3.down * cardSpawnYCoordinate + Vector3.left * 1.4f; 
             spawnNextCard(position);
 
         }

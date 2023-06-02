@@ -3,7 +3,7 @@
     "CardName": "Bun",
     "CardPrice": 2.0,
     "ShopImagePath": "ShopSprites/bun",
-    "CardImagePath": "ShopSprites/bunproto"
+    "CardImagePath": "ShopSprites/bunsmall"
   },
   {
     "CardName": "Patty",
