@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderItems: 3
   speed: 2
+  isOnSpike: 0
 --- !u!50 &4485394198728437492
 Rigidbody2D:
   serializedVersion: 4
@@ -150,7 +151,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1 &3417168960047481228
 GameObject:
   m_ObjectHideFlags: 0
