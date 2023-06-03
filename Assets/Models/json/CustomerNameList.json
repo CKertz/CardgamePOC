@@ -1,0 +1,101 @@
+[
+{
+  "CustomerName": "Al",
+  "CustomerOrder": [
+    {
+      "MenuItemSpritePath": "MenuItemSprites/menuburger",
+      "IngredientList": [
+        {
+          "IngredientName": "bun"
+        },
+        {
+          "IngredientName": "patty"
+        },
+        {
+          "IngredientName": "cheese"
+        }
+      ],
+      "MenuItemName": "cheeseburger"
+    },
+    {
+      "MenuItemSpritePath": "MenuItemSprites/menufries",
+      "IngredientList": [
+        {
+          "IngredientName": "potatoes"
+        },
+        {
+          "IngredientName": "oil"
+        }
+      ],
+      "MenuItemName": "fries"
+    },
+    {
+      "MenuItemSpritePath": "MenuItemSprites/menudrink",
+      "IngredientList": [
+        {
+          "IngredientName": "drink"
+        }
+      ],
+      "MenuItemName": "drink"
+    }
+  ],
+  "CustomerSpritePath": "CharacterSprites/character1"
+},
+{
+  "CustomerName": "Bradley",
+  "CustomerOrder": [
+    {
+      "MenuItemSpritePath": "MenuItemSprites/menufries",
+      "IngredientList": [
+        {
+          "IngredientName": "potatoes"
+        },
+        {
+          "IngredientName": "oil"
+        }
+      ],
+      "MenuItemName": "fries"
+    },
+    {
+      "MenuItemSpritePath": "MenuItemSprites/menudrink",
+      "IngredientList": [
+        {
+          "IngredientName": "drink"
+        }
+      ],
+      "MenuItemName": "drink"
+    }
+  ],
+  "CustomerSpritePath": "CharacterSprites/character2"
+},
+{
+  "CustomerName": "Chris",
+  "CustomerOrder": [
+    {
+      "MenuItemSpritePath": "MenuItemSprites/menuburger",
+      "IngredientList": [
+        {
+          "IngredientName": "bun"
+        },
+        {
+          "IngredientName": "patty"
+        },
+        {
+          "IngredientName": "cheese"
+        }
+      ],
+      "MenuItemName": "cheeseburger"
+    },
+    {
+      "MenuItemSpritePath": "MenuItemSprites/menudrink",
+      "IngredientList": [
+        {
+          "IngredientName": "drink"
+        }
+      ],
+      "MenuItemName": "drink"
+    }
+  ],
+  "CustomerSpritePath": "CharacterSprites/character3"
+},
+]
