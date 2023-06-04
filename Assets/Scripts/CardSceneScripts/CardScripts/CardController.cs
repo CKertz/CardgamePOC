@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CardController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class CardController : MonoBehaviour
 
     private float spawnedYCoordinate;
     private float spawnedXCoordinate;
+    public UnityEvent OnCardPlayed;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,9 +59,9 @@ public class CardController : MonoBehaviour
 
     private void OnMouseUp()
     {
-        //if y position is > -0.2, consume card else snap back to original location
-        if(transform.localPosition.y > -0.4)
+        if(transform.localPosition.y > -0.5)
         {
+            OnCardPlayed.Invoke();
             Destroy(gameObject);
         }
         else

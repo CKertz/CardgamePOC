@@ -15,6 +15,8 @@ public class DataManager : MonoBehaviour
     public List<Customer> unservedCustomers = new List<Customer>();
     public Dictionary<GameObject, float> customerXPositionTracker = new Dictionary<GameObject, float>();
 
+    public int spawnedDishCount = 0;
+
 
     private void Awake()
     {
