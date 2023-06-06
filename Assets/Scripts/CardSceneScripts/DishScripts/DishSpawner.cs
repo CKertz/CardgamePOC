@@ -9,7 +9,7 @@ public class DishSpawner : MonoBehaviour
     private float dishYPosition = -0.2f;
     private float dishSpacing = 0.5f;
 
-    public void InstantiateDish()
+    public GameObject InstantiateDish()
     {
         //handle transform positioning (lines of multiple dishes)
         //handle passing on correct food prefab to dishcontroller
@@ -17,9 +17,10 @@ public class DishSpawner : MonoBehaviour
         GameObject dish = Instantiate(dishPrefab, adjustedSpawnPosition, Quaternion.identity);
         //dish.transform.parent = transform.parent;
         DataManager.Instance.spawnedDishCount++;
+        return dish;
     }
 
-    public void InstantiatePlatedDish(string associatedRecipe)
+    public void InstantiatePlatedDish(string associatedRecipe, GameObject emptyDish)
     {
         GameObject associatedRecipePrefab = Resources.Load<GameObject>(associatedRecipe);
         if (associatedRecipePrefab == null )
@@ -28,6 +29,7 @@ public class DishSpawner : MonoBehaviour
             return;
         }
         GameObject spawnedPrefab = Instantiate(associatedRecipePrefab);
+        spawnedPrefab.transform.SetParent(emptyDish.transform, false);
     }
 
     private Vector3 CalculateDishSpawnPosition()
