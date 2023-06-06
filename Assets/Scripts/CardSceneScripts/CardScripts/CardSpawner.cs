@@ -34,11 +34,6 @@ public class CardSpawner : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
-
     private void spawnNextCard(Vector3 position)
     {
         //get child object of prefab named CardName
@@ -82,6 +77,9 @@ public class CardSpawner : MonoBehaviour
         {
             Debug.Log("Child GameObject not found.");
         }
+        var cardScript = cardPrefab.GetComponent<CardController>();
+        Debug.Log("associated recipe on card spawner:" + DataManager.Instance.deck.CardList.Last().AssociatedRecipePrefabPath);
+        cardScript.associatedRecipePrefabPath = DataManager.Instance.deck.CardList.Last().AssociatedRecipePrefabPath;
         GameObject instance = Instantiate(cardPrefab, position, Quaternion.identity);
         instance.transform.parent = transform;
 
@@ -155,6 +153,7 @@ public class CardSpawner : MonoBehaviour
                 Card card = new Card();
                 card.CardName = "DummyCard";
                 card.CardSpritePath = deckHandler.lookupCardSpritePathByName("Bun");
+                card.AssociatedRecipePrefabPath = "PlatedFoodPrefabs/prefab_BurgerPlated";
                 DataManager.Instance.deck.CardList.Add(card);
             }
             testingDataManager.gameObject.SetActive(false);

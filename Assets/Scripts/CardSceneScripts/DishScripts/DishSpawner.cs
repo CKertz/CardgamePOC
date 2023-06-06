@@ -19,6 +19,17 @@ public class DishSpawner : MonoBehaviour
         DataManager.Instance.spawnedDishCount++;
     }
 
+    public void InstantiatePlatedDish(string associatedRecipe)
+    {
+        GameObject associatedRecipePrefab = Resources.Load<GameObject>(associatedRecipe);
+        if (associatedRecipePrefab == null )
+        {
+            Debug.Log("AssociatedRecipe prefab not found: " + associatedRecipe);
+            return;
+        }
+        GameObject spawnedPrefab = Instantiate(associatedRecipePrefab);
+    }
+
     private Vector3 CalculateDishSpawnPosition()
     {
         float xPos = dishXPosition + (DataManager.Instance.spawnedDishCount * dishSpacing);

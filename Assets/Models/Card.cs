@@ -10,5 +10,7 @@ namespace Assets.Models
     {
         public string CardName { get; set; }
         public string CardSpritePath { get; set; }
+
+        public string AssociatedRecipePrefabPath { get; set; }
     }
 }

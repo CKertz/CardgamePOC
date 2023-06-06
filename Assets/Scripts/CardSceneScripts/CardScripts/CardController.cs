@@ -13,6 +13,8 @@ public class CardController : MonoBehaviour
     private float spawnedXCoordinate;
     public UnityEvent OnCardPlayed;
 
+    public string associatedRecipePrefabPath;
+
     void Start()
     {
         spawnedXCoordinate = transform.localPosition.x;
@@ -52,6 +54,8 @@ public class CardController : MonoBehaviour
     {
         if(transform.localPosition.y > -0.5)
         {
+            var dishSpawner = GameObject.Find("DishSpawner").GetComponent<DishSpawner>();
+            dishSpawner.InstantiatePlatedDish(associatedRecipePrefabPath);
             OnCardPlayed.Invoke();
             Destroy(gameObject);
         }
