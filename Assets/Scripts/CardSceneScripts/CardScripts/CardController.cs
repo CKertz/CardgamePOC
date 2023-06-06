@@ -12,18 +12,13 @@ public class CardController : MonoBehaviour
     private float spawnedYCoordinate;
     private float spawnedXCoordinate;
     public UnityEvent OnCardPlayed;
-    // Start is called before the first frame update
+
     void Start()
     {
         spawnedXCoordinate = transform.localPosition.x;
         spawnedYCoordinate = transform.localPosition.y;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnMouseUpAsButton()
     {
         if (Time.time - lastClickTime < doubleClickTimeThreshold)
@@ -51,10 +46,6 @@ public class CardController : MonoBehaviour
     private void OnMouseDrag()
     {
         transform.position = GetMouseWorldPosition() + mousePostiionOffset;
-        if (transform.localPosition.y > -0.3)
-        {
-            Debug.Log("in consume zone");
-        }
     }
 
     private void OnMouseUp()
