@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlatedDishController : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnableDishIngredientSpriteByCardName(string cardName)
     {
-        
+        var ingredientToActivate = transform.Find(cardName).gameObject;
+        ingredientToActivate.GetComponent<SpriteRenderer>().enabled = true;
     }
 }

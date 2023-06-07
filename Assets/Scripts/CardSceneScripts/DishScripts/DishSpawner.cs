@@ -20,16 +20,17 @@ public class DishSpawner : MonoBehaviour
         return dish;
     }
 
-    public void InstantiatePlatedDish(string associatedRecipe, GameObject emptyDish)
+    public GameObject InstantiatePlatedDish(string associatedRecipe, GameObject emptyDish)
     {
         GameObject associatedRecipePrefab = Resources.Load<GameObject>(associatedRecipe);
         if (associatedRecipePrefab == null )
         {
             Debug.Log("AssociatedRecipe prefab not found: " + associatedRecipe);
-            return;
+            return null;
         }
         GameObject spawnedPrefab = Instantiate(associatedRecipePrefab);
         spawnedPrefab.transform.SetParent(emptyDish.transform, false);
+        return spawnedPrefab;
     }
 
     private Vector3 CalculateDishSpawnPosition()

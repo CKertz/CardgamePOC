@@ -1,3 +1,4 @@
+using Assets.Models;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +14,19 @@ public class CardController : MonoBehaviour
     private float spawnedXCoordinate;
 
     public string associatedRecipePrefabPath;
+    public string cardName;
 
     void Start()
     {
         spawnedXCoordinate = transform.localPosition.x;
         spawnedYCoordinate = transform.localPosition.y;
+    }
+
+    public void setCardMetaData(Card card)
+    {
+        this.cardName = card.CardName;
+        this.associatedRecipePrefabPath = card.AssociatedRecipePrefabPath;
+        Debug.Log("cardcontroller cardname:" +cardName);
     }
 
     private void OnMouseUpAsButton()
@@ -55,7 +64,12 @@ public class CardController : MonoBehaviour
         {
             var dishSpawner = GameObject.Find("DishSpawner").GetComponent<DishSpawner>();
             var emptyDish = dishSpawner.InstantiateDish();
-            dishSpawner.InstantiatePlatedDish(associatedRecipePrefabPath, emptyDish);
+            
+            var newDish = dishSpawner.InstantiatePlatedDish(associatedRecipePrefabPath, emptyDish);
+            var platedDishController = newDish.GetComponentInChildren<PlatedDishController>();
+
+            platedDishController.EnableDishIngredientSpriteByCardName(cardName);
+
             Destroy(gameObject);
         }
         else

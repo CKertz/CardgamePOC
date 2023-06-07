@@ -78,9 +78,10 @@ public class CardSpawner : MonoBehaviour
             Debug.Log("Child GameObject not found.");
         }
         var cardScript = cardPrefab.GetComponent<CardController>();
-        Debug.Log("associated recipe on card spawner:" + DataManager.Instance.deck.CardList.Last().AssociatedRecipePrefabPath);
-        cardScript.associatedRecipePrefabPath = DataManager.Instance.deck.CardList.Last().AssociatedRecipePrefabPath;
+        cardScript.setCardMetaData(DataManager.Instance.deck.CardList.Last());
+
         GameObject instance = Instantiate(cardPrefab, position, Quaternion.identity);
+        
         instance.transform.parent = transform;
 
         DataManager.Instance.deck.CardList.Remove(DataManager.Instance.deck.CardList.Last());
@@ -151,7 +152,7 @@ public class CardSpawner : MonoBehaviour
             for (int i = 0; i < startingHandCount; i++)
             {
                 Card card = new Card();
-                card.CardName = "DummyCard";
+                card.CardName = "Bun";
                 card.CardSpritePath = deckHandler.lookupCardSpritePathByName("Bun");
                 card.AssociatedRecipePrefabPath = "PlatedFoodPrefabs/prefab_BurgerPlated";
                 DataManager.Instance.deck.CardList.Add(card);
