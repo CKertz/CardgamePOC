@@ -1,4 +1,5 @@
 using Assets.Models;
+using Assets.Scripts.CardSceneScripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,20 @@ public class CardController : MonoBehaviour
     public string associatedRecipePrefabPath;
     public string cardName;
 
+    //UnityEvent onCardPlayed;
+    CardPlayEvent onCardPlayed;
+
     void Start()
     {
+        PlayCardHandler playCardHandler = new PlayCardHandler();
+
         spawnedXCoordinate = transform.localPosition.x;
         spawnedYCoordinate = transform.localPosition.y;
+
+        if (onCardPlayed == null)
+        {
+            onCardPlayed = new CardPlayEvent();
+        }
     }
 
     public void setCardMetaData(Card card)
@@ -63,12 +74,8 @@ public class CardController : MonoBehaviour
         if(transform.localPosition.y > -0.5)
         {
             var dishSpawner = GameObject.Find("DishSpawner").GetComponent<DishSpawner>();
-            var emptyDish = dishSpawner.InstantiateDish();
-            
-            var newDish = dishSpawner.InstantiatePlatedDish(associatedRecipePrefabPath, emptyDish);
-            var platedDishController = newDish.GetComponentInChildren<PlatedDishController>();
 
-            platedDishController.EnableDishIngredientSpriteByCardName(cardName);
+            dishSpawner.AttemptToInstantiateDish(cardName, associatedRecipePrefabPath, gameObject);
 
             Destroy(gameObject);
         }
@@ -78,3 +85,41 @@ public class CardController : MonoBehaviour
         }
     }
 }
+
+[System.Serializable]
+public class CardPlayEvent : UnityEvent<string,string,GameObject>
+{
+
+}
+
+/*
+ * in datamanger -> list<plateddish> activedishes
+ * PlatedDish model:
+ *      +DishName -> make a mapper to make it more readable? i.e. a dict for  DishName = burger, AssociatedRecipe = prefab_BurgerPlated
+ *      +IsCompleted
+ * 
+ * algorithm:
+ * 
+ * a card is played. 
+ * 
+ * if it's an ingredient
+ *     if 5 dishes are currently active AND (no active dishes have card's associatedrecipe OR the ones that do already have this ingredient on them)
+ *          too many dishes, disallow
+ *          
+ *     if no activedish exists with the same associatedrecipe, 
+ *          create a new dish and enable sprite of cardname
+ *          scan all spriterenderers on plate and see if dish is done (1 ingredient dishes edge case)
+ *          if all spriterenderers in plateddish are enabled, 
+ *              order is complete, mark as no longer active/complete
+ *          else enable the sprite of cardname
+ *     else
+ *          get activedish with same associated recipe AND !IsCompleted
+ *          check if spriterenderer can be enabled on it.
+ *              if it is already enabled, 
+ *                  if less than 5 dishes active
+ *                      make a new plate with new ingredient 
+ *                  else disallow
+ *              else enable spriterenderer
+ *          
+ *  
+ */
