@@ -12,12 +12,15 @@ namespace Assets.Models
         public string DishPrefabName { get; set; }
         public bool IsCompleted { get; set; }
         public GameObject PlatedDishObject { get; set; }
+        public int DishID { get; set; }
 
-        public PlatedDish(string dishPrefabName, bool isCompleted, GameObject platedDishObject) 
+        public PlatedDish(string dishPrefabName, bool isCompleted, GameObject platedDishObject, int dishID) 
         {
             this.DishPrefabName = dishPrefabName;
             this.IsCompleted = isCompleted;
             this.PlatedDishObject = platedDishObject;
+            this.DishID = dishID;
         }
+
     }
 }

@@ -18,6 +18,8 @@ public class DataManager : MonoBehaviour
     public int spawnedDishCount = 0;
 
     public List<PlatedDish> activeDishes = new List<PlatedDish>();
+    //dishIDCounter is used for logging/debugging purposes in dish spawning
+    public int dishIDCounter = 0;
 
     private void Awake()
     {

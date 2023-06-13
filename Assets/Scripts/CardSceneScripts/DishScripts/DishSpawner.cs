@@ -14,10 +14,9 @@ public class DishSpawner : MonoBehaviour
     {
         Debug.Log("AttemptToInstantiateDish called. cardname" + cardName);
         var availableDishList = GetAllDishesAvailableWithAssociatedRecipe(cardName, associatedRecipePrefabPath);
-        //var dishToEdit = GetFirstDishAvailableWithAssociatedRecipe(cardName, associatedRecipePrefabPath);
         if (DataManager.Instance.activeDishes.Count >= 5 && availableDishList.Count == 0 )
         {
-            Debug.LogWarning("There is no room for this card to be played");
+            Debug.LogWarning("There is no room for this card to be played. activedish.count="+ DataManager.Instance.activeDishes.Count + " availabeDishList count:"+availableDishList.Count);
             return;
         }
 
@@ -31,15 +30,17 @@ public class DishSpawner : MonoBehaviour
             var platedDishController = newDish.GetComponentInChildren<PlatedDishController>();
             platedDishController.EnableDishIngredientSpriteByCardName(cardName);
             // check if dish is done (1 card orders)
-            if(IsDishComplete(newDish))
+            var dishID = DataManager.Instance.dishIDCounter;
+            Debug.Log("dishID about to be added:" + dishID);
+            if (IsDishComplete(newDish))
             {
-                DataManager.Instance.activeDishes.Add(new PlatedDish(associatedRecipePrefabPath, isCompleted: true, newDish));
+                DataManager.Instance.activeDishes.Add(new PlatedDish(associatedRecipePrefabPath, isCompleted: true, newDish,dishID));
             }
             else
             {
-                DataManager.Instance.activeDishes.Add(new PlatedDish(associatedRecipePrefabPath, isCompleted: false, newDish));
+                DataManager.Instance.activeDishes.Add(new PlatedDish(associatedRecipePrefabPath, isCompleted: false, newDish, dishID));
             }
-
+            DataManager.Instance.dishIDCounter++;
         }
         else
         {
@@ -50,14 +51,13 @@ public class DishSpawner : MonoBehaviour
                 Debug.Log("checking dish in dishlist: " + dish.DishPrefabName);
                 if(!IsIngredientSpriteActiveForDish(cardName, dish.PlatedDishObject))
                 {
-                    Debug.Log("sprite is able to activate for dish");
+                    Debug.Log("sprite:"+cardName+ " is able to activate for dish. attempting to enable now.");
                     var platedDishController = dish.PlatedDishObject.GetComponentInChildren<PlatedDishController>();
                     platedDishController.EnableDishIngredientSpriteByCardName(cardName);
 
                     if (IsDishComplete(dish.PlatedDishObject))
                     {
-                        //TODO: don't think this is right
-                        DataManager.Instance.activeDishes.Add(new PlatedDish(associatedRecipePrefabPath, isCompleted: true, dish.PlatedDishObject));
+                        dish.IsCompleted = true;
                     }
                     break;
                 }
@@ -72,7 +72,6 @@ public class DishSpawner : MonoBehaviour
         //handle passing on correct food prefab to dishcontroller
         var adjustedSpawnPosition = CalculateDishSpawnPosition();
         GameObject dish = Instantiate(dishPrefab, adjustedSpawnPosition, Quaternion.identity);
-        //dish.transform.parent = transform.parent;
         DataManager.Instance.spawnedDishCount++;
         return dish;
     }
@@ -118,13 +117,13 @@ public class DishSpawner : MonoBehaviour
         List<PlatedDish> dishes = new List<PlatedDish>();
         foreach (PlatedDish platedDish in DataManager.Instance.activeDishes)
         {
-            Debug.Log("checking singleton plateddish:" + platedDish.DishPrefabName + " for cardname: "+ cardName + "iscompleted status:"+platedDish.IsCompleted);
+            Debug.Log("checking singleton plateddish:" + platedDish.DishPrefabName + " for cardname: "+ cardName + "iscompleted status:"+platedDish.IsCompleted + " dishID:"+platedDish.DishID);
             if (!platedDish.IsCompleted)
             {
                 Debug.Log("dish is not completed");
                 if (platedDish.DishPrefabName == associatedRecipePrefabPath && !IsIngredientSpriteActiveForDish(cardName, platedDish.PlatedDishObject))
                 {
-                    Debug.Log(platedDish.DishPrefabName + " added to available list");
+                    Debug.Log(platedDish.DishPrefabName + " added to available list. dishID:"+platedDish.DishID);
                     dishes.Add(platedDish);
                 }
             }
@@ -154,7 +153,7 @@ public class DishSpawner : MonoBehaviour
         {
             if (!spriteRenderer.enabled)
             {
-                Debug.Log("sprite is disabled for" + spriteRenderer.gameObject.name);
+                Debug.Log("dish is incomplete because not all renderers are enabled");
                 return false;
             }
         }
