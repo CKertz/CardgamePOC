@@ -2,22 +2,43 @@
   {
     "CardName": "Bun",
     "CardPrice": 2.0,
-    "ShopImagePath": "ShopSprites/bun",
+    "ShopImagePath": "ShopSprites/bunproto",
     "CardImagePath": "ShopSprites/bunsmall",
     "AssociatedRecipePrefabPath": "PlatedFoodPrefabs/prefab_BurgerPlated"
   },
   {
     "CardName": "Patty",
     "CardPrice": 4.0,
-    "ShopImagePath": "ShopSprites/patty",
+    "ShopImagePath": "ShopSprites/pattyproto",
     "CardImagePath": "ShopSprites/pattyproto",
     "AssociatedRecipePrefabPath": "PlatedFoodPrefabs/prefab_BurgerPlated"
   },
   {
     "CardName": "Cheese",
     "CardPrice": 3.0,
-    "ShopImagePath": "ShopSprites/cheese",
+    "ShopImagePath": "ShopSprites/cheeseproto",
     "CardImagePath": "ShopSprites/cheeseproto",
     "AssociatedRecipePrefabPath": "PlatedFoodPrefabs/prefab_BurgerPlated"
+  },
+  {
+    "CardName": "Oil",
+    "CardPrice": 1.0,
+    "ShopImagePath": "ShopSprites/oilproto",
+    "CardImagePath": "ShopSprites/oilproto",
+    "AssociatedRecipePrefabPath": "PlatedFoodPrefabs/prefab_FriesPlated"
+  },
+  {
+    "CardName": "Potato",
+    "CardPrice": 1.0,
+    "ShopImagePath": "ShopSprites/potatoproto",
+    "CardImagePath": "ShopSprites/potatoproto",
+    "AssociatedRecipePrefabPath": "PlatedFoodPrefabs/prefab_FriesPlated"
+  },
+  {
+    "CardName": "Soda",
+    "CardPrice": 2.0,
+    "ShopImagePath": "ShopSprites/sodaproto",
+    "CardImagePath": "ShopSprites/sodaproto",
+    "AssociatedRecipePrefabPath": "PlatedFoodPrefabs/prefab_SodaPlated"
   }
 ]
