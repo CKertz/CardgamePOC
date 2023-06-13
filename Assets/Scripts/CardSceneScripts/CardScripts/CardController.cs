@@ -77,6 +77,7 @@ public class CardController : MonoBehaviour
 
             dishSpawner.AttemptToInstantiateDish(cardName, associatedRecipePrefabPath, gameObject);
 
+            // TODO: destroying card won't always happen. i.e. in cases where card can't be played
             Destroy(gameObject);
         }
         else
