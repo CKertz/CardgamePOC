@@ -75,10 +75,17 @@ public class CardController : MonoBehaviour
         {
             var dishSpawner = GameObject.Find("DishSpawner").GetComponent<DishSpawner>();
 
-            dishSpawner.AttemptToInstantiateDish(cardName, associatedRecipePrefabPath, gameObject);
+            var dishIsSpawned = dishSpawner.AttemptToInstantiateDish(cardName, associatedRecipePrefabPath, gameObject);
 
-            // TODO: destroying card won't always happen. i.e. in cases where card can't be played
-            Destroy(gameObject);
+            // destroying card won't always happen. i.e. in cases where card can't be played due to lack of counter space
+            if (dishIsSpawned)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                transform.localPosition = new Vector3(spawnedXCoordinate, spawnedYCoordinate);
+            }
         }
         else
         {

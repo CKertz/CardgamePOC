@@ -10,14 +10,14 @@ public class DishSpawner : MonoBehaviour
     private float dishYPosition = -0.2f;
     private float dishSpacing = 0.5f;
 
-    public void AttemptToInstantiateDish(string cardName, string associatedRecipePrefabPath, GameObject cardObject)
+    public bool AttemptToInstantiateDish(string cardName, string associatedRecipePrefabPath, GameObject cardObject)
     {
         Debug.Log("AttemptToInstantiateDish called. cardname" + cardName);
         var availableDishList = GetAllDishesAvailableWithAssociatedRecipe(cardName, associatedRecipePrefabPath);
         if (DataManager.Instance.activeDishes.Count >= 5 && availableDishList.Count == 0 )
         {
             Debug.LogWarning("There is no room for this card to be played. activedish.count="+ DataManager.Instance.activeDishes.Count + " availabeDishList count:"+availableDishList.Count);
-            return;
+            return false;
         }
 
         if (availableDishList.Count == 0 && DataManager.Instance.activeDishes.Count < 5)
@@ -63,7 +63,7 @@ public class DishSpawner : MonoBehaviour
                 }
             }
         }
-
+        return true;
     }
 
     private GameObject InstantiateDish()
