@@ -25,6 +25,7 @@ public class DishSpawner : MonoBehaviour
             Debug.Log("availabledishlist is 0 and activedishes < 5");
             //there is room to make a new dish and we are making a fresh one, not contributing to an existing one
             var emptyDish = InstantiateDish();
+            var emptyDishController = emptyDish.GetComponent<DishController>();
 
             var newDish = InstantiateFoodPrefab(associatedRecipePrefabPath, emptyDish);
             var platedDishController = newDish.GetComponentInChildren<PlatedDishController>();
@@ -34,11 +35,15 @@ public class DishSpawner : MonoBehaviour
             Debug.Log("dishID about to be added:" + dishID);
             if (IsDishComplete(newDish))
             {
-                DataManager.Instance.activeDishes.Add(new PlatedDish(associatedRecipePrefabPath, isCompleted: true, newDish,dishID));
+                var platedDish = new PlatedDish(associatedRecipePrefabPath, isCompleted: true, newDish, dishID);
+                DataManager.Instance.activeDishes.Add(platedDish);
+                emptyDishController.platedDish = platedDish;
             }
             else
             {
-                DataManager.Instance.activeDishes.Add(new PlatedDish(associatedRecipePrefabPath, isCompleted: false, newDish, dishID));
+                var platedDish = new PlatedDish(associatedRecipePrefabPath, isCompleted: false, newDish, dishID);
+                DataManager.Instance.activeDishes.Add(platedDish);
+                emptyDishController.platedDish = platedDish;
             }
             DataManager.Instance.dishIDCounter++;
         }

@@ -1,5 +1,7 @@
+using Assets.Models;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +13,7 @@ public class DishController : MonoBehaviour
     public UnityEvent OnDishTrashed;
     //isOnTrash is modified in TrashCanController to help trigger trash event
     public bool isOnTrash = false;
+    public PlatedDish platedDish;
 
     private float dishServeWindowXPosition = 0.25f;
     private float dishServeWindowYPosition = 0.55f;
@@ -52,14 +55,15 @@ public class DishController : MonoBehaviour
         }
         else if(IsDishOnServingWindow())
         {
-            if (DataManager.Instance.dishInWindowCount < 5)
+            if (DataManager.Instance.dishesInWindow.Count < 5)
             {
                 var updatedPosition = CalculateDishServeWindowPosition();
                 transform.localPosition = updatedPosition;
                 Debug.Log("transform name:" + transform.gameObject.name + " updated position:"+updatedPosition);
                 DataManager.Instance.spawnedDishCount--;
-                DataManager.Instance.dishInWindowCount++;
-                Debug.Log("spawnedDishCount updated to:" + DataManager.Instance.spawnedDishCount + " , dishInWindowCount = "+DataManager.Instance.dishInWindowCount);
+                DataManager.Instance.dishesInWindow.Add(platedDish);
+                Debug.Log("new dish in window:" + DataManager.Instance.dishesInWindow.Last().DishPrefabName);
+                Debug.Log("spawnedDishCount updated to:" + DataManager.Instance.spawnedDishCount + " , DataManager.Instance.dishesInWindow.Count = " + DataManager.Instance.dishesInWindow.Count);
 
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;
             }
@@ -86,7 +90,7 @@ public class DishController : MonoBehaviour
 
     private Vector3 CalculateDishServeWindowPosition()
     {
-        float xPos = dishServeWindowXPosition + (DataManager.Instance.dishInWindowCount * dishServeWindowSpacing);
+        float xPos = dishServeWindowXPosition + (DataManager.Instance.dishesInWindow.Count * dishServeWindowSpacing);
         Debug.Log("calculated window X:" + xPos);
         return new Vector3(xPos, dishServeWindowYPosition, 0);
     }

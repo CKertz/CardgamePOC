@@ -12,11 +12,7 @@ public class OrderController : MonoBehaviour
     private Vector3 mousePostiionOffset;
     private float ticketRackOriginalXCoordinate;
     private float ticketRackOriginalYCoordinate = 0.43f;
-
-    void Start()
-    {
-
-    }
+    private Customer customer;
 
     private void OnMouseOver()
     {
@@ -45,10 +41,6 @@ public class OrderController : MonoBehaviour
     private void OnMouseDrag()
     {
         transform.position = GetMouseWorldPosition() + mousePostiionOffset;
-        if (transform.localPosition.y > -0.3)
-        {
-            //Debug.Log("in consume zone");
-        }
     }
 
     private void OnMouseUp()
@@ -58,6 +50,8 @@ public class OrderController : MonoBehaviour
         {
             gameObject.transform.localScale = new Vector3(0.1f, 0.1f);
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            Debug.Log("customer name test:" + customer.CustomerName);
+            //trigger a scan over all items in window and attempt to fulfill order
         }
         else
         {
@@ -65,15 +59,6 @@ public class OrderController : MonoBehaviour
             transform.localPosition = new Vector3(ticketRackOriginalXCoordinate, ticketRackOriginalYCoordinate);
 
         }
-        //if is in collider of the ticket spike, delete and trigger event for order completed
-        //if (/*remove this and add if collided with ticketspike boxcollider*/transform.localPosition.y > -0.4)
-        //{
-        //    Destroy(gameObject);
-        //}
-        //else
-        //{
-        //    transform.localPosition = new Vector3(originalXCoordinate, originalYCoordinate);
-        //}
     }
 
     public List<string> GetOrderItemSprites(Customer customer)
@@ -142,14 +127,15 @@ public class OrderController : MonoBehaviour
         }
     }
 
-    public void EnableOrder(Transform orderPrefab, Customer customer)
+    public void EnableOrder(Customer givenCustomer)
     {
         var orderBackgroundSprite = transform.GetComponent<SpriteRenderer>();
 
         orderBackgroundSprite.enabled = true;
         orderBackgroundSprite.transform.localPosition = new Vector3(1, 0.1f);
 
-        var orderItemSprites = GetOrderItemSprites(customer);
+        var orderItemSprites = GetOrderItemSprites(givenCustomer);
+        customer = givenCustomer;
         LoadOrderItemSprites(orderItemSprites, transform);
     }
 

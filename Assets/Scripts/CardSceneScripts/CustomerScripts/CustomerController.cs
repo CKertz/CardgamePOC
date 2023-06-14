@@ -88,7 +88,7 @@ public class CustomerController : MonoBehaviour
         var orderPrefab = transform.Find("prefab_CustomerOrder");
         var orderScript = orderPrefab.GetComponent<OrderController>();
 
-        orderScript.EnableOrder(orderPrefab, customer);
+        orderScript.EnableOrder(customer);
 
         StartCoroutine(MoveCustomerCoroutine(orderPrefab));
         customer.OrderTaken = true;

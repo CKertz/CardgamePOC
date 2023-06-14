@@ -797,6 +797,7 @@ MonoBehaviour:
   acceptedOrderCount: 0
   currentCustomerInLineCount: 0
   spawnedDishCount: 0
+  dishIDCounter: 0
 --- !u!4 &948596119
 Transform:
   m_ObjectHideFlags: 0
@@ -926,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 5414152659987467252, guid: ca4b941ef536e344193c0d782f0a3795, type: 3}
-  startingHandCount: 10
+  startingHandCount: 5
 --- !u!4 &1145329302
 Transform:
   m_ObjectHideFlags: 0
