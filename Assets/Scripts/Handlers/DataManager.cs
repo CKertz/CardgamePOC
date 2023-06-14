@@ -16,6 +16,7 @@ public class DataManager : MonoBehaviour
     public Dictionary<GameObject, float> customerXPositionTracker = new Dictionary<GameObject, float>();
 
     public int spawnedDishCount = 0;
+    public int dishInWindowCount = 0;
 
     public List<PlatedDish> activeDishes = new List<PlatedDish>();
     //dishIDCounter is used for logging/debugging purposes in dish spawning
