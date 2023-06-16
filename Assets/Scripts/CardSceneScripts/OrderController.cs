@@ -2,7 +2,9 @@ using Assets.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OrderController : MonoBehaviour
 {
@@ -14,6 +16,14 @@ public class OrderController : MonoBehaviour
     private float ticketRackOriginalYCoordinate = 0.43f;
     private Customer customer;
 
+    public OnOrderCompleteEvent onOrderComplete;
+    private void Start()
+    {
+        if (onOrderComplete == null)
+        {
+            onOrderComplete = new OnOrderCompleteEvent();
+        }
+    }
     private void OnMouseOver()
     {
         if(!isOnSpike)
@@ -52,6 +62,7 @@ public class OrderController : MonoBehaviour
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             Debug.Log("customer name test:" + customer.CustomerName);
             //trigger a scan over all items in window and attempt to fulfill order
+            onOrderComplete.Invoke(customer);
         }
         else
         {
@@ -139,8 +150,46 @@ public class OrderController : MonoBehaviour
         LoadOrderItemSprites(orderItemSprites, transform);
     }
 
+    public void StartOrderCompletionListener(Customer customer)
+    {
+        onOrderComplete.AddListener(HandleCompletedOrder);
+    }
+
+    private void HandleCompletedOrder(Customer customer)
+    {            
+        MenuItemMapper mapper = new MenuItemMapper();
+
+        this.customer = customer;
+        foreach(var item in customer.CustomerOrder)
+        {
+            Debug.Log("requesting:"+item.MenuItemName);
+            //TODO: Test this
+            var menuItemNameMapped = mapper.menuItems[item.MenuItemName];
+            Debug.Log("menuitemmapped:" + menuItemNameMapped);
+            //testing
+            foreach(var dish in DataManager.Instance.dishesInWindow)
+            {
+                Debug.Log("windowdishinfo:" + dish.DishID + " " + dish.DishPrefabName + " " + dish.IsCompleted);
+            }
+            //
+            var dishToServe = DataManager.Instance.dishesInWindow.Where(x => x.DishPrefabName == menuItemNameMapped && x.IsCompleted).FirstOrDefault();
+            if (dishToServe != null)
+            {
+                Debug.Log("dishInwindow ready to serve with ID:" + dishToServe.DishID);
+            }
+            else
+            {
+                Debug.LogWarning("no applicable dish found to serve");
+            }
+        }
+
+    }
     public void RemoveOrder()
     {
         Destroy(this.gameObject);
     }
+}
+[System.Serializable]
+public class OnOrderCompleteEvent : UnityEvent<Customer>
+{
 }

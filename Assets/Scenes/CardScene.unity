@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 5414152659987467252, guid: ca4b941ef536e344193c0d782f0a3795, type: 3}
-  startingHandCount: 5
+  startingHandCount: 10
 --- !u!4 &1145329302
 Transform:
   m_ObjectHideFlags: 0

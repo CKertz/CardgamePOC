@@ -15,7 +15,7 @@
           "IngredientName": "cheese"
         }
       ],
-      "MenuItemName": "cheeseburger"
+      "MenuItemName": "burger"
     },
     {
       "MenuItemSpritePath": "MenuItemSprites/menufries",
@@ -33,10 +33,10 @@
       "MenuItemSpritePath": "MenuItemSprites/menudrink",
       "IngredientList": [
         {
-          "IngredientName": "drink"
+          "IngredientName": "soda"
         }
       ],
-      "MenuItemName": "drink"
+      "MenuItemName": "soda"
     }
   ],
   "CustomerSpritePath": "CharacterSprites/character1"
@@ -60,10 +60,10 @@
       "MenuItemSpritePath": "MenuItemSprites/menudrink",
       "IngredientList": [
         {
-          "IngredientName": "drink"
+          "IngredientName": "soda"
         }
       ],
-      "MenuItemName": "drink"
+      "MenuItemName": "soda"
     }
   ],
   "CustomerSpritePath": "CharacterSprites/character2"
@@ -84,18 +84,18 @@
           "IngredientName": "cheese"
         }
       ],
-      "MenuItemName": "cheeseburger"
+      "MenuItemName": "burger"
     },
     {
       "MenuItemSpritePath": "MenuItemSprites/menudrink",
       "IngredientList": [
         {
-          "IngredientName": "drink"
+          "IngredientName": "soda"
         }
       ],
-      "MenuItemName": "drink"
+      "MenuItemName": "soda"
     }
   ],
   "CustomerSpritePath": "CharacterSprites/character3"
-},
+}
 ]

@@ -25,7 +25,7 @@ namespace Assets.Scripts.CardSceneScripts
             cheeseburgerIngredients.Add(bun);
 
             MenuItem cheeseburger = new MenuItem();
-            cheeseburger.MenuItemName = "Cheeseburger";
+            cheeseburger.MenuItemName = "burger";
             cheeseburger.MenuItemSpritePath = "MenuItemSprites/menuburger";
             cheeseburger.IngredientList = cheeseburgerIngredients;
             //
@@ -35,17 +35,17 @@ namespace Assets.Scripts.CardSceneScripts
             friesIngredients.Add(potato);
 
             MenuItem fries = new MenuItem();
-            fries.MenuItemName = "Fries";
+            fries.MenuItemName = "fries";
             fries.MenuItemSpritePath = "MenuItemSprites/menufries";
             fries.IngredientList = friesIngredients;
             //
-            List<Ingredient> drinkIngredients = new List<Ingredient>();
-            Ingredient drinkIngredient = new Ingredient();
-            drinkIngredient.IngredientName = "drink";
-            drinkIngredients.Add(drinkIngredient);
+            List<Ingredient> sodaIngredients = new List<Ingredient>();
+            Ingredient sodaIngredient = new Ingredient();
+            sodaIngredient.IngredientName = "soda";
+            sodaIngredients.Add(sodaIngredient);
 
             MenuItem drink = new MenuItem();
-            drink.MenuItemName = "Drink";
+            drink.MenuItemName = "soda";
             drink.MenuItemSpritePath = "MenuItemSprites/menudrink";
             drink.IngredientList = friesIngredients;
             //

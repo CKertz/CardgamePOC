@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DummyCard
+  m_text: Cheese
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
   m_sharedMaterial: {fileID: 6785464795631653130, guid: 9c292c02dcb3bad4992326baa3fc80c0, type: 2}
@@ -245,7 +245,7 @@ SpriteRenderer:
   m_SortingLayerID: 1375269449
   m_SortingLayer: 1
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 96b2423894929aa429caa3286b6aa918, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3c3c4b8af3dede14bad933b62d5e8965, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -382,19 +382,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ccc13d684461d4e859e1ca87c01155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnCardPlayed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1540973880421451926, guid: d5fa6959863563747ba738b62ba1520c, type: 3}
-        m_TargetAssemblyTypeName: DishSpawner, Assembly-CSharp
-        m_MethodName: InstantiateDish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  associatedRecipePrefabPath: 
+  associatedRecipePrefabPath: PlatedFoodPrefabs/prefab_BurgerPlated
+  cardName: Cheese

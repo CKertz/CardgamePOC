@@ -87,6 +87,7 @@ public class CustomerController : MonoBehaviour
         // start taking order. need to add it to a ticket, start the waitingforfoodtimer, and move customer out of scene
         var orderPrefab = transform.Find("prefab_CustomerOrder");
         var orderScript = orderPrefab.GetComponent<OrderController>();
+        orderScript.StartOrderCompletionListener(customer);
 
         orderScript.EnableOrder(customer);
 

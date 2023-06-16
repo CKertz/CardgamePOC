@@ -131,6 +131,21 @@ MonoBehaviour:
   orderItems: 3
   speed: 2
   isOnSpike: 0
+  onOrderCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2143107131230574685, guid: fa34fd28de1039e4f8e2720e76363100, type: 3}
+        m_TargetAssemblyTypeName: DishController, Assembly-CSharp
+        m_MethodName: CompleteOrder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &4485394198728437492
 Rigidbody2D:
   serializedVersion: 4
