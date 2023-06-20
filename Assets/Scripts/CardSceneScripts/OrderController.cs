@@ -16,12 +16,12 @@ public class OrderController : MonoBehaviour
     private float ticketRackOriginalYCoordinate = 0.43f;
     private Customer customer;
 
-    public OnOrderCompleteEvent onOrderComplete;
+    public OnOrderCompleteEvent onOrderCompleteEvent;
     private void Start()
     {
-        if (onOrderComplete == null)
+        if (onOrderCompleteEvent == null)
         {
-            onOrderComplete = new OnOrderCompleteEvent();
+            onOrderCompleteEvent = new OnOrderCompleteEvent();
         }
     }
     private void OnMouseOver()
@@ -62,7 +62,7 @@ public class OrderController : MonoBehaviour
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             Debug.Log("customer name test:" + customer.CustomerName);
             //trigger a scan over all items in window and attempt to fulfill order
-            onOrderComplete.Invoke(customer);
+            onOrderCompleteEvent.Invoke(customer);
         }
         else
         {
@@ -152,7 +152,14 @@ public class OrderController : MonoBehaviour
 
     public void StartOrderCompletionListener(Customer customer)
     {
-        onOrderComplete.AddListener(HandleCompletedOrder);
+        onOrderCompleteEvent.AddListener(HandleCompletedOrder);
+        onOrderCompleteEvent.AddListener(HandleCalculateScore);
+    }
+
+    private void HandleCalculateScore(Customer customer)
+    {
+        var scoreManager = GameObject.Find("ScoreManager");
+        scoreManager.GetComponent<ScoreController>().CalculateOrder(customer);
     }
 
     private void HandleCompletedOrder(Customer customer)
@@ -163,19 +170,22 @@ public class OrderController : MonoBehaviour
         foreach(var item in customer.CustomerOrder)
         {
             Debug.Log("requesting:"+item.MenuItemName);
-            //TODO: Test this
+
             var menuItemNameMapped = mapper.menuItems[item.MenuItemName];
             Debug.Log("menuitemmapped:" + menuItemNameMapped);
-            //testing
+
             foreach(var dish in DataManager.Instance.dishesInWindow)
             {
                 Debug.Log("windowdishinfo:" + dish.DishID + " " + dish.DishPrefabName + " " + dish.IsCompleted);
             }
-            //
+            
             var dishToServe = DataManager.Instance.dishesInWindow.Where(x => x.DishPrefabName == menuItemNameMapped && x.IsCompleted).FirstOrDefault();
             if (dishToServe != null)
             {
                 Debug.Log("dishInwindow ready to serve with ID:" + dishToServe.DishID);
+                var dishToServeParent = dishToServe.PlatedDishObject.transform.parent.gameObject;
+                DataManager.Instance.dishesInWindow.Remove(dishToServe);
+                Destroy(dishToServeParent);
             }
             else
             {
