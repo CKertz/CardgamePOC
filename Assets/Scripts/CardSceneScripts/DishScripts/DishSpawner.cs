@@ -153,7 +153,6 @@ public class DishSpawner : MonoBehaviour
 
     private bool IsDishComplete(GameObject platedDish)
     {
-        //gameObject instead of platedDish?
         foreach (SpriteRenderer spriteRenderer in platedDish.GetComponentsInChildren<SpriteRenderer>())
         {
             if (!spriteRenderer.enabled)

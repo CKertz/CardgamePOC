@@ -11,5 +11,6 @@ namespace Assets.Models
         public string MenuItemSpritePath { get; set; }
         public List<Ingredient> IngredientList { get; set; }
         public string MenuItemName { get; set; }
+        public float MenuItemPrice { get; set; }
     }
 }

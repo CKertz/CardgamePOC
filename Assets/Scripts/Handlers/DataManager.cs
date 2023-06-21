@@ -22,6 +22,9 @@ public class DataManager : MonoBehaviour
     //dishIDCounter is used for logging/debugging purposes in dish spawning
     public int dishIDCounter = 0;
 
+    //ScoreController 
+    public float totalDailyEarnings = 0;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
