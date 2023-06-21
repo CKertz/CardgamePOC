@@ -154,12 +154,28 @@ public class OrderController : MonoBehaviour
     {
         onOrderCompleteEvent.AddListener(HandleCompletedOrder);
         onOrderCompleteEvent.AddListener(HandleCalculateScore);
+        onOrderCompleteEvent.AddListener(HandleRemoveTimer);
     }
 
     private void HandleCalculateScore(Customer customer)
     {
         var scoreManager = GameObject.Find("ScoreManager");
         scoreManager.GetComponent<ScoreController>().CalculateOrder(customer);
+    }
+
+    private void HandleRemoveTimer(Customer customer)
+    {
+        var customerSpawner = GameObject.Find("CustomerSpawner");
+        var spawnedCustomers = customerSpawner.GetComponentsInChildren<CustomerController>();
+        foreach(var spawnedCustomer in spawnedCustomers)
+        {
+            Debug.Log("checking spawnedCustomer:"+ spawnedCustomer.customer.CustomerName + "for customername:"+customer.CustomerName);
+            if(spawnedCustomer.customer.CustomerName == customer.CustomerName && customer.OrderTaken)
+            {               
+                Debug.Log("match found for customer name:"+ spawnedCustomer.customer.CustomerName);
+                spawnedCustomer.gameObject.GetComponentInChildren<TimerScript>().RemoveTimer();
+            }
+        }
     }
 
     private void HandleCompletedOrder(Customer customer)

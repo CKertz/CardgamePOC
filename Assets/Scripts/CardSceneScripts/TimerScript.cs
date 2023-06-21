@@ -59,5 +59,10 @@ public class TimerScript : MonoBehaviour
         currentTime = waitingForFoodTime;
     }
 
+    public void RemoveTimer()
+    {
+        Debug.Log("removing timer with: " + timerText.text + " remaining");
+        Destroy(gameObject);
+    }
 
 }
